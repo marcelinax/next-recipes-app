@@ -1,3 +1,4 @@
 export default {
-    MINUTES: 'min'
+    MINUTES: 'min',
+    RECIPES_WORLD: 'ŚWIAT PRZEPISÓW'
 };
