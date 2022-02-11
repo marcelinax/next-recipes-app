@@ -1,7 +1,7 @@
 export default {
-    BREAKFAST: 'śniadanie',
-    LUNCH: 'obiad',
-    DINNER: 'kolacja',
-    DESSERT: 'deser',
-    CAKE: 'ciasto'
+    BREAKFAST: 'Śniadanie',
+    LUNCH: 'Obiad',
+    DINNER: 'Kolacja',
+    DESSERT: 'Deser',
+    CAKE: 'Ciasto'
 };
