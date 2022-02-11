@@ -32,6 +32,7 @@ module.exports = {
         }],
         quotes: ['error', 'single'],
         semi: ['error', 'always'],
-        'no-unused-vars': ['off']
+        'no-unused-vars': ['off'],
+        'import/no-anonymous-default-export': ['off']
     }
 };
