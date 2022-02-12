@@ -2,10 +2,10 @@ import React from 'react';
 import { IoMdTime } from 'react-icons/io';
 import { IoPersonOutline } from 'react-icons/io5';
 import {IoCellular } from 'react-icons/io5';
-import locales from '../../../locales';
-import RecipeIngredientList from '../Recipe/RecipeIngredientList';
 import PropTypes from 'prop-types';
-import { getDifficultyColor } from '../../../utils/getDifficultyColor';
+import locales from '@locales';
+import { getDifficultyColor } from '@utils/getDifficultyColor';
+import RecipeIngredientList from '@components/Recipe/RecipeIngredientList';
 const RecipeView = ({bgImg, title, description, servings, difficulty, time}) => {
     return (
         <div className='w-1/2 flex flex-col mx-auto mb-10'>

@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@components/views/*": ["./src/components/views/*"],
+        "@components/*": ["./src/components/*"],
+        "@utils/*": ["./utils/*"],
+        "@locales": ["./locales.js"],
+        "@constants/*": ["./constants/*"],
+        "@styles/*": ["./styles/*"],
+        "@layouts/*": ["./layouts/*"]    
+    }
+    }
+  }

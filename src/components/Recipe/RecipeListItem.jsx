@@ -2,9 +2,9 @@ import React from 'react';
 import { IoMdTime } from 'react-icons/io';
 import {IoCellular } from 'react-icons/io5';
 import PropTypes from 'prop-types';
-import { getDifficultyColor } from '../../../utils/getDifficultyColor';
-import locales from '../../../locales';
 import Link from 'next/link';
+import { getDifficultyColor } from '@utils/getDifficultyColor';
+import locales from '@locales';
 const RecipeListItem = ({id, title, description, bgImg, category, difficulty, time}) => {
     return (
         <Link href={{

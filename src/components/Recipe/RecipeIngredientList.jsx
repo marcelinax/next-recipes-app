@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import RecipeIngredientListItem from './RecipeIngredientListItem';
-
 const RecipeIngredientList = ({ ingredients }) => {
     
     const [currentRenderedIngredientsAmount, setCurrentRenderedIngredientsAmount] = useState(3);
@@ -30,6 +30,10 @@ const RecipeIngredientList = ({ ingredients }) => {
             {currentRenderedIngredientsAmount < ingredients.length && <RecipeIngredientListItem isIngredient={false} ingredientsAmount={getRemainingIngredientsAmount()} onShowMoreIngredients={onShowMoreIngredients}/>}
         </div>
     );
+};
+
+RecipeIngredientList.propTypes = {
+    ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default RecipeIngredientList;

@@ -1,6 +1,6 @@
+import locales from '@locales';
 import React from 'react';
 import { IoIosHeartEmpty } from 'react-icons/io';
-import locales from '../../../locales';
 
 const Header = () => {
     return (
