@@ -26,7 +26,6 @@ const RecipeIngredientList = ({ ingredients }) => {
         <div className='w-full flex flex-col'>
             {renderIngredientItems(currentRenderedIngredientsAmount)}
             {currentRenderedIngredientsAmount < ingredients.length && <RecipeIngredientListItem isIngredient={false} ingredientsAmount={getRemainingIngredientsAmount()} onShowMoreIngredients={onShowMoreIngredients}/>}
-          
         </div>
     );
 };

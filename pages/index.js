@@ -1,16 +1,15 @@
+import HomepageLayout from '@layouts/Homepage.layout';
 import difficulty from '../constants/difficulty';
 import foodCategory from '../constants/foodCategory';
 import FoodCategoryItem from '../src/components/FoodCategoryItem';
 import RecipeListItem from './../src/components/Recipe/RecipeListItem';
 
 export default function Home() {
-
     const renderFoodCategoryItems = () => {
         return Object.values(foodCategory).map(category => (
             <FoodCategoryItem key={category} category={category}/>
         ));
     };
-    
     return (
         <>
             <div className='w-full flex px-6'>
@@ -24,3 +23,9 @@ export default function Home() {
         </>
     );
 }
+  
+Home.getLayout = function getLayout(page) {
+    return (
+        <HomepageLayout>{page}</HomepageLayout>
+    );
+};

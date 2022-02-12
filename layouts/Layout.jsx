@@ -1,12 +1,14 @@
 import React from 'react';
 import Header from '../src/components/Composition/Header';
 
-const Layout = ({children}) => {
+
+const Layout = ({ children }) => {
     return (
-        <div >
+        <div>
             <Header />
+            {children[0]}
             <div className='container mx-auto flex flex-col mt-10'>
-                {children}
+                {children[1]}
             </div>
         </div>
     );

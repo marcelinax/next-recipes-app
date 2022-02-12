@@ -1,3 +1,5 @@
+import Button from '@components/Buttons/Button';
+import buttonTypes from '@constants/buttonTypes';
 import locales from '@locales';
 import Link from 'next/link';
 import React from 'react';
@@ -10,9 +12,12 @@ const Header = () => {
                 <Link href='/'>
                     <a className='text-white font-bold text-3xl'>{locales.RECIPES_WORLD}</a>
                 </Link>
-                <div className='flex relative cursor-pointer'>
-                    <IoIosHeartEmpty size={20} className='fill-white'/>
-                    <span className='absolute -top-3 -right-5 p-0.5 px-1.5 text-xs text-black/50 font-bold rounded-sm bg-white'>3</span>
+                <div className='flex items-center'>
+                    <Button bgColor='bg-white' textColor='text-black/40' title={locales.NEW_RECIPE} type={buttonTypes.TEXT} isLink={true} linkTo='/create-recipe'/>
+                    <div className='flex relative cursor-pointer'>
+                        <IoIosHeartEmpty size={25} className='fill-white'/>
+                        <span className='absolute -top-3 -right-5 p-0.5 px-1.5 text-xs text-black/50 font-bold rounded-sm bg-white'>3</span>
+                    </div>
                 </div>
             </div>
         </div>

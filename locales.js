@@ -7,5 +7,7 @@ export default {
     PREPARATION_TIME: 'Czas przygotowania',
     DIFFICULTY: 'Poziom trudności',
     SHOW_MORE_INGREDIENTS: 'Pokaż więcej składników',
-    STEP: 'KROK'
+    STEP: 'KROK',
+    NEW_RECIPE: 'Nowy Przepis',
+    SEARCH: 'Szukaj...'
 };
