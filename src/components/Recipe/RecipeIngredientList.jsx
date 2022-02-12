@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import RecipeIngredientListItem from './RecipeIngredientListItem';
 const RecipeIngredientList = ({ ingredients }) => {
     
+    const dontAnimateUntilIndex = 2;
     const [currentRenderedIngredientsAmount, setCurrentRenderedIngredientsAmount] = useState(3);
 
     const getRemainingIngredientsAmount = () => {
@@ -13,21 +14,19 @@ const RecipeIngredientList = ({ ingredients }) => {
     };
     const onShowMoreIngredients = () => {
         setCurrentRenderedIngredientsAmount(prevValue => prevValue + getRemainingIngredientsAmount());
-        return ingredients.map((ingredient, index) => {
-            if (index + 1 >= currentRenderedIngredientsAmount + getRemainingIngredientsAmount())
-                return <RecipeIngredientListItem key={ingredient} name={ingredient} />;
-        });
+      
     };
     const renderIngredientItems = (amount) => {
         return ingredients && ingredients.map((ingredient, index) => {
             if (amount > index)
-                return <RecipeIngredientListItem key={ingredient} name={ingredient} />;
+                return <RecipeIngredientListItem key={ingredient} name={ingredient} animate={index > dontAnimateUntilIndex }/>;
         });
     };
     return (
         <div className='w-full flex flex-col'>
             {renderIngredientItems(currentRenderedIngredientsAmount)}
             {currentRenderedIngredientsAmount < ingredients.length && <RecipeIngredientListItem isIngredient={false} ingredientsAmount={getRemainingIngredientsAmount()} onShowMoreIngredients={onShowMoreIngredients}/>}
+          
         </div>
     );
 };
