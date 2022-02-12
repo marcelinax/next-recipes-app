@@ -1,11 +1,13 @@
 import React from 'react';
-import Header from '../src/components/Recipe/Composition/Header';
+import Header from '../src/components/Composition/Header';
 
 const Layout = ({children}) => {
     return (
-        <div>
+        <div >
             <Header />
-            {children}
+            <div className='container mx-auto flex flex-col mt-10'>
+                {children}
+            </div>
         </div>
     );
 };
