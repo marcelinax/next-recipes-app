@@ -1,15 +1,20 @@
+import Form from '@components/Form/Form';
 import Layout from '@layouts/Layout';
 
 
-export default function CreateRecipe() {
-   
+const CreateRecipe = () => {
     return (
-        <h1>Create Recipe</h1>
+        <Form/>
     );
-}
+};
   
 CreateRecipe.getLayout = function getLayout(page) {
     return (
-        <Layout>{page}</Layout>
+        <Layout>
+            <></>
+            {page}
+        </Layout>
     );
 };
+
+export default CreateRecipe;

@@ -17,3 +17,4 @@ Recipe.getLayout = function getLayout(page) {
     );
 };
 
+export default Recipe;

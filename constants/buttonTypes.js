@@ -1,4 +1,5 @@
 export default {
     TEXT: 'text',
-    OUTLINE: 'outline'
+    OUTLINE: 'outline',
+    ICON: 'icon'
 };

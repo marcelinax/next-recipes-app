@@ -9,11 +9,11 @@ import React from 'react';
 const HomepageLayout = ({children}) => {
     return (
         <Layout>
-            <div className='w-full shadow-inner bg-white py-10' >
+            <div className='w-full shadow-inner bg-white py-10'>
                 <div className='container mx-auto px-6'>
                     <div className='w-full flex'>
                         <Search/>
-                        <CustomSelect options={difficulty} label={locales.DIFFICULTY}/>
+                        <CustomSelect options={difficulty} label={locales.DIFFICULTY} width='w-40' margin='ml-3'/>
                     </div>
                 </div>
             </div>

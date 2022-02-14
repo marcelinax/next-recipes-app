@@ -9,5 +9,10 @@ export default {
     SHOW_MORE_INGREDIENTS: 'Pokaż więcej składników',
     STEP: 'KROK',
     NEW_RECIPE: 'Nowy Przepis',
-    SEARCH: 'Szukaj...'
+    SEARCH: 'Szukaj...',
+    TITLE: 'Tytuł',
+    CATEGORY: 'Kategoria',
+    DESCRIPTION: 'Opis',
+    CHOOSE_PHOTO: 'Wybierz zdjęcie',
+    ADD_NEW_INGREDIENT: 'DODAJ SKŁADNIK'
 };

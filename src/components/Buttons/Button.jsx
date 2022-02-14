@@ -2,14 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import buttonTypes from '@constants/buttonTypes';
 import Link from 'next/link';
-const Button = ({ title, bgColor, textColor, onClick, type, borderColor, isLink = false, linkTo }) => {
+const Button = ({ title, bgColor, textColor, onClick, type, borderColor, isLink = false, linkTo, icon, className }) => {
 
     const drawOutlineButton = () => {
-        return <button onClick={onClick} className={`mr-5 px-4 py-2 bg-transparent border-2 ${borderColor} rounded-lg ${textColor}  text-sm font-semibold hover:scale-95 transition-all cursor-pointer`}>{title}</button>;
+        return <button onClick={onClick} className={`px-4 py-2 bg-transparent border-2 ${borderColor} rounded-lg ${textColor}  text-sm font-semibold hover:scale-95 transition-all cursor-pointer ${className}`}>{title}</button>;
     };
 
     const drawTextButton = () => {
-        return <button onClick={onClick} className={`mr-5 px-4 py-2 ${bgColor} rounded-lg ${textColor} text-sm font-semibold hover:scale-95 transition-all cursor-pointer}`}>{title}</button>;
+        return <button onClick={onClick} className={`px-4 py-2 ${bgColor} rounded-lg ${textColor} text-sm font-semibold hover:scale-95 transition-all cursor-pointer ${className}`}>{title}</button>;
+    };
+
+    const drawIconButton = () => {
+        return <button onClick={onClick} className={`px-4 py-2 ${bgColor} rounded-lg  text-sm font-semibold hover:scale-95 transition-all cursor-pointer ${className}`}>{icon}</button>;
     };
 
     const getButtonByType = () => {
@@ -18,6 +22,8 @@ const Button = ({ title, bgColor, textColor, onClick, type, borderColor, isLink 
             return drawOutlineButton();
         case buttonTypes.TEXT:
             return drawTextButton();
+        case buttonTypes.ICON:
+            return drawIconButton();
         default:
             return drawTextButton();
         }

@@ -6,14 +6,15 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
+import colors from 'themes/colors';
 
-const CustomSelect = ({ label, options}) => {
+const CustomSelect = ({ label, options, width, margin, bgColor = 'bg-transparent'}) => {
     const CustomMenuItem = styled(MenuItem)(() => ({
         '&.MuiMenuItem-root': {
-            color: 'rgb(0 0 0 / 0.5)',
+            color: colors.GRAY,
             fontWeight: '600',
             ':hover': {
-                backgroundColor: 'rgb(0 0 0 / 0.5)',
+                backgroundColor: colors.GRAY,
                 color: 'white'
             }
         }
@@ -23,19 +24,16 @@ const CustomSelect = ({ label, options}) => {
         return Object.entries(options).map(entry => [<CustomMenuItem value={entry[0].toLowerCase()} key={entry[0]}>{entry[1]}</CustomMenuItem>]); 
     };
     return (
-        <Box sx={{
-            minWidth: 150,
-            marginLeft: '1.5rem',
-        }}>
+        <Box className={`${width} ${margin} ${bgColor}`}>
             <FormControl fullWidth
                 sx={{
                     '& .MuiFormLabel-filled': {
                         backgroundColor: 'white',
                         fontWeight: '700',
                         paddingX: '5px',
-                        color: 'rgb(0 0 0 / 0.5)',
+                        color: colors.GRAY,
                         '&.Mui-focused': {
-                            color: 'rgb(0 0 0 / 0.5)',
+                            color: colors.GRAY,
                         }
                     },
                     '& .MuiSelect-root': {
@@ -65,7 +63,10 @@ const CustomSelect = ({ label, options}) => {
 };
 
 CustomSelect.propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
+    width: PropTypes.string.isRequired,
+    margin: PropTypes.string,
+    bgColor: PropTypes.string,
     options: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
