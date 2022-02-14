@@ -7,6 +7,19 @@
 $gray: rgba(0, 0, 0, 0.5);
 $lightGray: #d6d3d1;
 
+@keyframes fade {
+    0%{
+        opacity: 0;
+        bottom: -30%;
+        transform: translateY(30px);
+    }
+    100%{
+        opacity: 1;
+        bottom: 0;
+        transform: translateY(0);
+    }
+}
+
 body{
     background-color: #F5F7FB;
 }
@@ -23,5 +36,9 @@ body{
     &::-webkit-scrollbar {
         width: 8px;
       }
+}
+
+.ingredient-item-animation, .preparation-step-animation {
+    animation: 0.3s ease-in fade;
 }
 

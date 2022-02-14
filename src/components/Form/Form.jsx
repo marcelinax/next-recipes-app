@@ -7,32 +7,35 @@ import difficulty from '@constants/difficulty';
 import foodCategory from '@constants/foodCategory';
 import locales from '@locales';
 import React from 'react';
+import buttonTypes from '@constants/buttonTypes';
+import FormPreparationStepsList from '@components/Form/FormPreparationStepsList';
+import FormIngredientsList from '@components/Form/FormIngredientsList';
 
 const Form = () => {
 
     return (
-        <div className='w-3/4 flex mx-auto flex-col'>
+        <div className='w-3/4 flex mx-auto flex-col mb-10'>
             <form>
                 <FormRow heading={locales.TITLE} width='w-full'>
-                    <Input width='w-full'/>
+                    <Input id='title' width='w-full'/>
                 </FormRow>
                 <FormRow heading={locales.DESCRIPTION} width='w-full'>
-                    <Textarea width='w-full'/>
+                    <Textarea width='w-full' cols='40' rows='3'/>
                 </FormRow>
                 <div className='w-full flex mb-5'>
                     <FormRow heading={locales.CATEGORY} width='basis-1/2'>
-                        <CustomSelect options={foodCategory.singular} bgColor='bg-white'/>
+                        <CustomSelect options={foodCategory.singular} bgColor='bg-white' width='w-full'/>
                     </FormRow>
                     <FormRow heading={locales.DIFFICULTY} width='basis-1/2' className='ml-6'>
-                        <CustomSelect options={difficulty} bgColor='bg-white'/>
+                        <CustomSelect options={difficulty} bgColor='bg-white' width='w-full'/>
                     </FormRow>
                 </div>
                 <div className='w-full flex'>
                     <FormRow heading={locales.PREPARATION_TIME} width='basis-1/3'>
-                        <Input width='w-full'/>
+                        <Input id='preparation-time' width='w-full'/>
                     </FormRow>
                     <FormRow heading={locales.AMOUNT_OF_SERVINGS} width='basis-1/3' className='ml-6'>
-                        <Input width='w-full'/>
+                        <Input id='amount' width='w-full'/>
                     </FormRow>
                     <FormRow heading={locales.CHOOSE_PHOTO} width='basis-1/3' className='ml-6'>
                         <input type="file" accept="image/jpeg" className="block w-full mt-1 text-sm text-black/50 font-semibold 
@@ -45,25 +48,16 @@ const Form = () => {
                         />
                     </FormRow>
                 </div>
-                <FormRow heading={locales.INGREDIENTS} width='w-full'>
-                    <div className='w-full flex'>
-                        <div className='basis-1/2 flex flex-col'>
-                            <Input width='w-full' />
-                            <Button type='text' bgColor='bg-black/50' textColor='text-white' title={locales.ADD_NEW_INGREDIENT} className='mt-5 w-fit'/>
-                        </div>
-                        <div className='basis-1/2 ml-5'>
-                            <div className='w-full p-5 bg-zinc-200 rounded-lg shadow-inner max-h-44 overflow-y-auto scrollbar'>
-                                <p className='text-black/50 font-semibold'>300g masła</p>
-                                <p className='text-black/50 font-semibold'>300g masła</p>
-                                <p className='text-black/50 font-semibold'>300g masła</p>
-                                <p className='text-black/50 font-semibold'>300g masła</p>
-                                <p className='text-black/50 font-semibold'>300g masła</p>
-                               
-                            </div>
-                        </div>
-                    </div>
+                <FormRow heading={locales.INGREDIENTS} width='w-full mt-5'>
+                    <FormIngredientsList/>
                 </FormRow>
-                <FormRow heading={locales.PREPARATION} width='w-full' />
+                <FormRow heading={locales.PREPARATION} width='w-full mt-10'>
+                    <FormPreparationStepsList/>
+                </FormRow>
+                <div className='w-full mt-10 justify-end flex'>
+                    <Button type={buttonTypes.OUTLINE} borderColor='border-black/50' textColor='text-black/50' title={locales.CANCEL} className='w-fit px-7 py-3 mr-3'/>
+                    <Button type={buttonTypes.TEXT} bgColor='bg-black/50' textColor='text-white' title={locales.SAVE} className='w-fit px-7 py-3' />
+                </div>
             </form>
         </div>
     );

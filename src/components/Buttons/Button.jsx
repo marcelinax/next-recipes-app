@@ -5,15 +5,15 @@ import Link from 'next/link';
 const Button = ({ title, bgColor, textColor, onClick, type, borderColor, isLink = false, linkTo, icon, className }) => {
 
     const drawOutlineButton = () => {
-        return <button onClick={onClick} className={`px-4 py-2 bg-transparent border-2 ${borderColor} rounded-lg ${textColor}  text-sm font-semibold hover:scale-95 transition-all cursor-pointer ${className}`}>{title}</button>;
+        return <button type='button' onClick={onClick} className={`px-4 py-2 bg-transparent border-2 ${borderColor} rounded-lg ${textColor}  text-sm font-semibold hover:scale-95 transition-all cursor-pointer ${className}`}>{title}</button>;
     };
 
     const drawTextButton = () => {
-        return <button onClick={onClick} className={`px-4 py-2 ${bgColor} rounded-lg ${textColor} text-sm font-semibold hover:scale-95 transition-all cursor-pointer ${className}`}>{title}</button>;
+        return <button type='button' onClick={onClick} className={`px-4 py-2 ${bgColor} rounded-lg ${textColor} text-sm font-semibold hover:scale-95 transition-all cursor-pointer ${className}`}>{title}</button>;
     };
 
     const drawIconButton = () => {
-        return <button onClick={onClick} className={`px-4 py-2 ${bgColor} rounded-lg  text-sm font-semibold hover:scale-95 transition-all cursor-pointer ${className}`}>{icon}</button>;
+        return <button type='button' onClick={onClick} className={`px-4 py-2 ${bgColor} rounded-lg  text-sm font-semibold hover:scale-95 transition-all cursor-pointer ${className}`}>{icon}</button>;
     };
 
     const getButtonByType = () => {
@@ -34,7 +34,7 @@ const Button = ({ title, bgColor, textColor, onClick, type, borderColor, isLink 
 
 Button.propTypes = {
     title: PropTypes.string.isRequired,
-    bgColor: PropTypes.string.isRequired,
+    bgColor: PropTypes.string,
     textColor: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     borderColor: PropTypes.string,

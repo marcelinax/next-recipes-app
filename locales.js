@@ -2,7 +2,7 @@ export default {
     MINUTES: 'min',
     RECIPES_WORLD: 'ŚWIAT PRZEPISÓW',
     PREPARATION: 'PRZYGOTOWANIE',
-    INGREDIENTS: 'INGREDIENTS',
+    INGREDIENTS: 'SKŁADNIKI',
     AMOUNT_OF_SERVINGS: 'Ilość porcji',
     PREPARATION_TIME: 'Czas przygotowania',
     DIFFICULTY: 'Poziom trudności',
@@ -14,5 +14,8 @@ export default {
     CATEGORY: 'Kategoria',
     DESCRIPTION: 'Opis',
     CHOOSE_PHOTO: 'Wybierz zdjęcie',
-    ADD_NEW_INGREDIENT: 'DODAJ SKŁADNIK'
+    ADD_NEW_INGREDIENT: 'DODAJ SKŁADNIK',
+    ADD_NEW_STEP: 'DODAJ KROK',
+    SAVE: 'ZAPISZ',
+    CANCEL: 'ANULUJ'
 };

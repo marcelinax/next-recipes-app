@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 const FormRow = ({ heading, children, width, className }) => {
     return (
-        <div className={`${width} flex flex-col mb-3 ${className}`}>
+        <div className={`${width} flex flex-col mb-5 ${className}`}>
             <FormHeading title={heading}/>
             {children}
         </div>

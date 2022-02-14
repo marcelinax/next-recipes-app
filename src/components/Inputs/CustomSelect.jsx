@@ -20,7 +20,7 @@ const CustomSelect = ({ label, options, width, margin, bgColor = 'bg-transparent
         }
     }));
 
-    const rednerSelectOptions = () => {
+    const renderSelectOptions = () => {
         return Object.entries(options).map(entry => [<CustomMenuItem value={entry[0].toLowerCase()} key={entry[0]}>{entry[1]}</CustomMenuItem>]); 
     };
     return (
@@ -45,7 +45,7 @@ const CustomSelect = ({ label, options, width, margin, bgColor = 'bg-transparent
                 <Select
                     labelId={label}
                     id="demo-simple-select"
-                    value={1}
+                    value=''
                     label={label}
                     onChange={() => { }}
                     className='border-2 border-black/20'
@@ -55,7 +55,7 @@ const CustomSelect = ({ label, options, width, margin, bgColor = 'bg-transparent
                         },                 
                     }}
                 >
-                    {rednerSelectOptions()}
+                    {renderSelectOptions()}
                 </Select>
             </FormControl>
         </Box>
@@ -67,7 +67,7 @@ CustomSelect.propTypes = {
     width: PropTypes.string.isRequired,
     margin: PropTypes.string,
     bgColor: PropTypes.string,
-    options: PropTypes.arrayOf(PropTypes.string).isRequired
+    options: PropTypes.object.isRequired
 };
 
 export default CustomSelect;
