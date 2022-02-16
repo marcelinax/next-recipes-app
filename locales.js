@@ -4,7 +4,7 @@ export default {
     PREPARATION: 'PRZYGOTOWANIE',
     INGREDIENTS: 'SKŁADNIKI',
     AMOUNT_OF_SERVINGS: 'Ilość porcji',
-    PREPARATION_TIME: 'Czas przygotowania',
+    PREPARATION_TIME: 'Czas przygotowania (minuty)',
     DIFFICULTY: 'Poziom trudności',
     SHOW_MORE_INGREDIENTS: 'Pokaż więcej składników',
     STEP: 'KROK',
@@ -17,5 +17,5 @@ export default {
     ADD_NEW_INGREDIENT: 'DODAJ SKŁADNIK',
     ADD_NEW_STEP: 'DODAJ KROK',
     SAVE: 'ZAPISZ',
-    CANCEL: 'ANULUJ'
+    CANCEL: 'ANULUJ',
 };

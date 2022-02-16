@@ -9,7 +9,9 @@
         "@locales": ["./locales.js"],
         "@constants/*": ["./constants/*"],
         "@styles/*": ["./styles/*"],
-        "@layouts/*": ["./layouts/*"]    
+        "@layouts/*": ["./layouts/*"],
+        "@api/*": ["./api"],
+        "@middleware/*": ["./middleware"]
     }
     }
   }

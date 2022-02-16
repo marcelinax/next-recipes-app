@@ -7,8 +7,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import colors from 'themes/colors';
+import { IoSwapVerticalOutline } from 'react-icons/io5';
 
-const CustomSelect = ({ label, options, width, margin, bgColor = 'bg-transparent'}) => {
+const CustomSelect = ({ value, setValue, label, options, width, margin, bgColor = 'bg-transparent'}) => {
     const CustomMenuItem = styled(MenuItem)(() => ({
         '&.MuiMenuItem-root': {
             color: colors.GRAY,
@@ -21,7 +22,7 @@ const CustomSelect = ({ label, options, width, margin, bgColor = 'bg-transparent
     }));
 
     const renderSelectOptions = () => {
-        return Object.entries(options).map(entry => [<CustomMenuItem value={entry[0].toLowerCase()} key={entry[0]}>{entry[1]}</CustomMenuItem>]); 
+        return Object.entries(options).map(entry => [<CustomMenuItem value={entry[0].toLowerCase()} key={entry[0]}>{entry[1].toUpperCase()}</CustomMenuItem>]); 
     };
     return (
         <Box className={`${width} ${margin} ${bgColor}`}>
@@ -37,7 +38,14 @@ const CustomSelect = ({ label, options, width, margin, bgColor = 'bg-transparent
                         }
                     },
                     '& .MuiSelect-root': {
-                        borderRadius: '0.5rem'
+                        borderRadius: '0.5rem',
+                    },
+                    '& .MuiSelect-select': {
+                        paddingY: '10px',
+                    },
+                    '& .MuiOutlinedInput-input': {
+                        color: colors.GRAY,
+                        fontWeight: '700',
                     }
                 }}>
                 <InputLabel id={label}
@@ -45,9 +53,9 @@ const CustomSelect = ({ label, options, width, margin, bgColor = 'bg-transparent
                 <Select
                     labelId={label}
                     id="demo-simple-select"
-                    value=''
+                    value={value}
                     label={label}
-                    onChange={() => { }}
+                    onChange={setValue}
                     className='border-2 border-black/20'
                     sx={{
                         '& .css-1d3z3hw-MuiOutlinedInput-notchedOutline':{

@@ -5,17 +5,17 @@ import buttonTypes from '@constants/buttonTypes';
 import locales from '@locales';
 import React, { useState } from 'react';
 
-const FormIngredientsList = () => {
+const FormIngredientsList = ({ setIngredients, ingredient, setIngredient}) => {
 
-    const [ingredients, setIngredients] = useState([]);
-    const [ingredient, setIngredient] = useState('');
+    const [ingredientsItems, setIngredientsItems] = useState([]);
 
     const onAddIngredient = () => {
-        setIngredients([...ingredients, <FormIngredientListItem key={ingredient} name={ingredient}/>]);
+        setIngredientsItems([...ingredientsItems, <FormIngredientListItem key={ingredient} name={ingredient} />]);
+        setIngredients();
     };
 
     const renderIngredients = () => {
-        return ingredients && ingredients.map(ing => (
+        return ingredientsItems && ingredientsItems.map(ing => (
             <FormIngredientListItem key={ing.key} name={ing.props.name}/>
         ));
     };

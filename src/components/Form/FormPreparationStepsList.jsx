@@ -4,14 +4,14 @@ import buttonTypes from '@constants/buttonTypes';
 import locales from '@locales';
 import React, { useState } from 'react';
 
-const FormPreparationStepsList = () => {
+const FormPreparationStepsList = ({step, setStep, setSteps}) => {
     
     const [currentStep, setCurrentStep] = useState(1);
-    const [steps, setSteps] = useState([]);
-    const [step, setStep] = useState('');
+    const [stepsItems, setStepsitems] = useState([]);
+    // const [step, setStep] = useState('');
 
     const renderPreparationSteps = () => {
-        return steps && steps.reverse().map(s => {
+        return stepsItems && stepsItems.reverse().map(s => {
             return <FormPreparationStepsListItem key={s.key} step={s.props.step} stepDescription={s.props.stepDescription} isAdded={true}/>;
         });
     };
@@ -19,7 +19,8 @@ const FormPreparationStepsList = () => {
     const onAddNewPreparationStep = () => {
         setCurrentStep(prevValue => prevValue + 1);
         setStep('');
-        setSteps([...steps, <FormPreparationStepsListItem key={currentStep} step={currentStep} setStepDescription={stepHandler} stepDescription={step} />]);
+        setStepsitems([...stepsItems, <FormPreparationStepsListItem key={currentStep} step={currentStep} setStepDescription={stepHandler} stepDescription={step} />]);
+        setSteps();
     };
 
     const stepHandler = (e) => {

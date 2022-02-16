@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { getDifficultyColor } from '@utils/getDifficultyColor';
 import locales from '@locales';
-const RecipeListItem = ({id, title, description, bgImg, category, difficulty, time}) => {
+const RecipeListItem = ({ id, title, description, bgImg, category, difficulty, time }) => {
     return (
         <Link href={{
             pathname: '/recipe/[id]',
