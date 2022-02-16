@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import colors from 'themes/colors';
 import { IoSwapVerticalOutline } from 'react-icons/io5';
 
-const CustomSelect = ({ value, setValue, label, options, width, margin, bgColor = 'bg-transparent'}) => {
+const CustomSelect = ({ value, setValue, label, options, width, margin, bgColor = 'bg-transparent', error }) => {
     const CustomMenuItem = styled(MenuItem)(() => ({
         '&.MuiMenuItem-root': {
             color: colors.GRAY,
@@ -42,6 +42,7 @@ const CustomSelect = ({ value, setValue, label, options, width, margin, bgColor 
                     },
                     '& .MuiSelect-select': {
                         paddingY: '10px',
+                        backgroundColor: 'transparent'
                     },
                     '& .MuiOutlinedInput-input': {
                         color: colors.GRAY,
@@ -56,7 +57,7 @@ const CustomSelect = ({ value, setValue, label, options, width, margin, bgColor 
                     value={value}
                     label={label}
                     onChange={setValue}
-                    className='border-2 border-black/20'
+                    className={`border-2 ${error ? 'border-red-600' : 'border-black/20'}`}
                     sx={{
                         '& .css-1d3z3hw-MuiOutlinedInput-notchedOutline':{
                             border: '0'
@@ -75,7 +76,8 @@ CustomSelect.propTypes = {
     width: PropTypes.string.isRequired,
     margin: PropTypes.string,
     bgColor: PropTypes.string,
-    options: PropTypes.object.isRequired
+    options: PropTypes.object.isRequired,
+    error: PropTypes.string,
 };
 
 export default CustomSelect;

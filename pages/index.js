@@ -33,14 +33,10 @@ const Home = ({ recipes }) => {
 };
 
 export const getServerSideProps = async () => {
-    console.log(1);
     const res = await apiClient.get('get-recipes');
     const recipes = res.data;
-    console.log(recipes);
-
 
     return {props: {recipes}};
-
 };
   
 Home.getLayout = function getLayout(page) {

@@ -4,20 +4,56 @@ import Input from '@components/Inputs/Input';
 import buttonTypes from '@constants/buttonTypes';
 import locales from '@locales';
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
+import messages from '@constants/messages';
+import { getFilteredErrorMessages } from '@utils/getFillteredErrorMessages';
 
-const FormIngredientsList = ({ setIngredients, ingredient, setIngredient}) => {
+const FormIngredientsList = ({ setIngredients, ingredient, setIngredient, deleteIngredient }) => {
 
     const [ingredientsItems, setIngredientsItems] = useState([]);
+    const [errors, setErrors] = useState([]);
 
     const onAddIngredient = () => {
-        setIngredientsItems([...ingredientsItems, <FormIngredientListItem key={ingredient} name={ingredient} />]);
-        setIngredients();
+        if (validate()) {
+            setIngredientsItems([...ingredientsItems, <FormIngredientListItem key={ingredient} id={uuidv4()} name={ingredient} />]);
+            setIngredients();
+            setIngredient('');
+            setErrors([]);
+        }
+    };
+    
+    const checkIngredientUniqueness = () => {
+        const existingIngredient = ingredientsItems.filter(item => item.props.name === ingredient);
+        return existingIngredient.length > 0;
+    };
+
+    const validate = () => {
+        let isValid = true;
+        const errs = [];
+        if (!ingredient) {
+            isValid = false;
+            errs.push(messages.INGREDIENT_CANNOT_BE_EMPTY);
+        }
+        if (checkIngredientUniqueness()) {
+            isValid = false;
+            errs.push(messages.INGREDIENT_ALREADY_EXISTS);
+        }
+        setErrors([...errs]);
+        return isValid;
     };
 
     const renderIngredients = () => {
         return ingredientsItems && ingredientsItems.map(ing => (
-            <FormIngredientListItem key={ing.key} name={ing.props.name}/>
+            <FormIngredientListItem key={ing.key} name={ing.props.name} onDelete={() => onDeleteIngredientItem(ing.props.id)}/>
         ));
+    };
+
+    const onDeleteIngredientItem = (id) => {
+        const ingredientIndex = ingredientsItems.findIndex(ingredient => ingredient.props.id === id);
+        ingredientsItems.splice(ingredientIndex, 1);
+        setIngredientsItems([...ingredientsItems]);
+        deleteIngredient(ingredientIndex);
     };
 
     const ingredientHandler = (e) => {
@@ -27,7 +63,7 @@ const FormIngredientsList = ({ setIngredients, ingredient, setIngredient}) => {
     return (
         <div className='w-full flex'>
             <div className='basis-1/2 flex flex-col'>
-                <Input id='ingredient' width='w-full' setValue={ingredientHandler} value={ingredient}/>
+                <Input id='ingredient' width='w-full' setValue={ingredientHandler} value={ingredient} error={getFilteredErrorMessages(errors, messages.INGREDIENT_CANNOT_BE_EMPTY) || getFilteredErrorMessages(errors, messages.INGREDIENT_ALREADY_EXISTS)}/>
                 <Button onClick={onAddIngredient} type={buttonTypes.TEXT} bgColor='bg-black/50' textColor='text-white' title={locales.ADD_NEW_INGREDIENT} className='mt-5 w-fit'/>
             </div>
             <div className='basis-1/2 ml-5'>
@@ -37,6 +73,11 @@ const FormIngredientsList = ({ setIngredients, ingredient, setIngredient}) => {
             </div>
         </div>
     );
+};
+
+FormIngredientsList.propTypes = {
+    error: PropTypes.string,
+    ingredient: PropTypes.string.isRequired,
 };
 
 export default FormIngredientsList;

@@ -3,12 +3,12 @@ import FormPreparationStepsListItem from '@components/Form/FormPreparationStepsL
 import buttonTypes from '@constants/buttonTypes';
 import locales from '@locales';
 import React, { useState } from 'react';
-
-const FormPreparationStepsList = ({step, setStep, setSteps}) => {
+import { v4 as uuidv4 } from 'uuid';
+import PropTypes from 'prop-types';
+const FormPreparationStepsList = ( {step, setStep, setSteps, error }) => {
     
     const [currentStep, setCurrentStep] = useState(1);
     const [stepsItems, setStepsitems] = useState([]);
-    // const [step, setStep] = useState('');
 
     const renderPreparationSteps = () => {
         return stepsItems && stepsItems.reverse().map(s => {
@@ -32,11 +32,16 @@ const FormPreparationStepsList = ({step, setStep, setSteps}) => {
             <div className='mt-5 mb-10'>
                 <Button onClick={onAddNewPreparationStep} type={buttonTypes.TEXT} bgColor='bg-black/50' textColor='text-white' title={locales.ADD_NEW_STEP}/>
             </div>
-            <FormPreparationStepsListItem key={currentStep} step={currentStep} stepDescription={step} setStepDescription={stepHandler}/>
+            <FormPreparationStepsListItem error={error} key={currentStep} step={currentStep} stepDescription={step} setStepDescription={stepHandler}/>
             {renderPreparationSteps()}
             
         </>
     );
+};
+
+FormPreparationStepsList.propTypes = {
+    error: PropTypes.string,
+    step: PropTypes.string.isRequired,
 };
 
 export default FormPreparationStepsList;

@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 const Textarea = ({ id, width, error, cols, rows, value, setValue, disabled = false }) => {
     return (
         <div className={`${width}`}>
-            <textarea id={id} disabled={disabled} value={value} onChange={setValue} cols={cols} rows={rows} className={`bg-white w-full p-3 outline-none border-2 font-semibold border-black/20 text-black/50 rounded-lg resize-none ${error && 'border-red-500'} `}/>
+            <textarea id={id} disabled={disabled} value={value} onChange={setValue} cols={cols} rows={rows} className='bg-white w-full p-3 outline-none border-2 font-semibold border-black/20 text-black/50 rounded-lg resize-none'/>
+            {error && <span className='text-xs text-red-600 font-medium'>{error}</span>}
         </div>
     );
 };

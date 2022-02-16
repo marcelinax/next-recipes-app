@@ -1,3 +1,15 @@
 export default {
-    
+    TITLE_CANNOT_BE_EMPTY: 'Podaj tytuł',
+    DESCRIPTION_CANNOT_BE_EMPTY: 'Podaj opis',
+    CHOOSE_CATEGORY: 'Wybierz kategorię',
+    CHOOSE_DIFFICULTY: 'Wybierz poziotm trudności',
+    CHOOSE_PHOTO: 'Wybierz zdjęcie',
+    PREPARATION_TIME_CANNOT_BE_EMPTY: 'Podaj czas przygotowania',
+    INVALID_DATA: 'Nieprawidłowe dane',
+    SERVINGS_CANNOT_BE_EMPTY: 'Podaj ilość porcji',
+    INGREDIENT_CANNOT_BE_EMPTY: 'Podaj składnik',
+    INGREDIENT_ALREADY_EXISTS: 'Składnik został już dodany',
+    INGREDIENTS_CANNOT_BE_EMPTY: 'Podaj co najmniej jeden składnik',
+    PREPARATION_STEP_CANNOT_BE_EMPTY: 'Podaj krok przygotowania',
+    PREPARATION_STEPS_CANNOT_BE_EMPTY: 'Podaj co najmniej jeden krok przygotowania',
 };
