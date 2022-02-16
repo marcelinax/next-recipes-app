@@ -1,13 +1,28 @@
 import RecipeView from '@components/views/Recipe.view';
-import difficulty from '@constants/difficulty';
 import Layout from '@layouts/Layout';
+import { apiClient } from 'api/apiClient';
 import React from 'react';
 
-const Recipe = () => {
+const Recipe = ({ recipe }) => {
+    
+
     return (
-        <RecipeView title='Gofry na słodko' servings={4} time='20' difficulty={difficulty.EASY} bgImg='https://cdn.galleries.smcloud.net/t/galleries/gf-RadU-dkf1-uYhP_gofry-na-slodko-przepis-z-programu-tvp2-pytanie-na-sniadanie-664x442-nocrop.jpg' description='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'/>
+        recipe && <RecipeView ingredients={recipe.ingredients} preparationSteps={recipe.preparationSteps} title={recipe.title} servings={recipe.servings} time={recipe.preparationTime} difficulty={recipe.difficulty} bgImg={recipe.photo} description={recipe.description}/>
+        
     );
 };
+
+export const getServerSideProps = async (context) => {
+    const res = await apiClient.get('get-recipe', {
+        params: {
+            id: context.params.id
+        }
+    });
+    const recipe = res.data;
+    return {props: {recipe}};
+};
+
+
 Recipe.getLayout = function getLayout(page) {
     return (
         <Layout>

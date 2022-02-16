@@ -7,7 +7,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import colors from 'themes/colors';
-import { IoSwapVerticalOutline } from 'react-icons/io5';
 
 const CustomSelect = ({ value, setValue, label, options, width, margin, bgColor = 'bg-transparent', error }) => {
     const CustomMenuItem = styled(MenuItem)(() => ({
@@ -22,7 +21,7 @@ const CustomSelect = ({ value, setValue, label, options, width, margin, bgColor 
     }));
 
     const renderSelectOptions = () => {
-        return Object.entries(options).map(entry => [<CustomMenuItem value={entry[0].toLowerCase()} key={entry[0]}>{entry[1].toUpperCase()}</CustomMenuItem>]); 
+        return Object.entries(options).map(entry => [<CustomMenuItem value={entry[1]} key={entry[0]}>{entry[1].toUpperCase()}</CustomMenuItem>]); 
     };
     return (
         <Box className={`${width} ${margin} ${bgColor}`}>

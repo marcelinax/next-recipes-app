@@ -15,10 +15,12 @@ import { convertFileToUrl } from '@utils/convertFileToUrl';
 import { apiClient } from 'api/apiClient';
 import messages from '@constants/messages';
 import { getFilteredErrorMessages } from '@utils/getFillteredErrorMessages';
+import { useRouter } from 'next/router';
 
 const Form = () => {
 
     const difficultyOptions = { ...difficulty };
+    const router = useRouter();
     const [formData, setFormData] = useState({
         title: '',
         description: '',
@@ -101,15 +103,15 @@ const Form = () => {
     const onCreateRecipe = async (e) => {
         e.preventDefault();
         try {
-            if (!validateForm()) {
+            if (validateForm()) {
                 await apiClient.post('create-recipe', {
                     ...formData,
                     preparationTime: +formData.preparationTime, 
                     servings: +formData.servings
                     
                 });
+                router.push('/');
             }
-           
         } catch (error) {
             console.log(error); 
         }
@@ -141,7 +143,7 @@ const Form = () => {
                     </FormRow>
                 </div>
                 <div className='w-full flex'>
-                    <FormRow heading={locales.PREPARATION_TIME} width='basis-1/3'>
+                    <FormRow heading={locales.PREPARATION_TIME_IN_MINUTES} width='basis-1/3'>
                         <Input id='preparationTime' width='w-full' value={+formData.preparationTime} setValue={inputHandler} error={getFilteredErrorMessages(errors, messages.PREPARATION_TIME_CANNOT_BE_EMPTY) || getFilteredErrorMessages(errors, messages.INVALID_DATA)}/>
                     </FormRow>
                     <FormRow heading={locales.AMOUNT_OF_SERVINGS} width='basis-1/3' className='ml-6'>
@@ -176,7 +178,7 @@ const Form = () => {
                     />
                 </FormRow>
                 <div className='w-full mt-10 justify-end flex'>
-                    <Button type={buttonTypes.OUTLINE} borderColor='border-black/50' textColor='text-black/50' title={locales.CANCEL} className='w-fit px-7 py-3 mr-3'/>
+                    <Button type={buttonTypes.OUTLINE} borderColor='border-black/50' textColor='text-black/50' isLink={true} linkTo='/' title={locales.CANCEL} className='w-fit px-7 py-3 mr-3'/>
                     <Button type={buttonTypes.TEXT} bgColor='bg-black/50' textColor='text-white' title={locales.SAVE} className='w-fit px-7 py-3' onClick={onCreateRecipe}/>
                 </div>
             </form>

@@ -6,7 +6,19 @@ import PropTypes from 'prop-types';
 import locales from '@locales';
 import { getDifficultyColor } from '@utils/getDifficultyColor';
 import RecipeIngredientList from '@components/Recipe/RecipeIngredientList';
-const RecipeView = ({bgImg, title, description, servings, difficulty, time}) => {
+import RecipePreparationStepsItem from '@components/Recipe/RecipePreparationStepsItem';
+const RecipeView = ({ bgImg, title, description, servings, difficulty, time, ingredients, preparationSteps }) => {
+    
+    const getIngredientsNames = () => {
+        return ingredients && ingredients.map(ingredient => ingredient.ingredient);
+    };
+
+    const renderPreparationSteps = () => {
+        return preparationSteps && preparationSteps.map((step, index) => (
+            <RecipePreparationStepsItem key={step.id} description={step.description} step={index + 1}/>
+        ));
+    };
+
     return (
         <div className='w-1/2 flex flex-col mx-auto mb-20'>
             <h1 className='font-semibold text-3xl mb-5 drop-shadow-2xl'>{title}</h1>
@@ -42,18 +54,13 @@ const RecipeView = ({bgImg, title, description, servings, difficulty, time}) => 
             <div className='mt-10 w-full flex flex-col'>
                 <h2 className='mb-2 font-semibold text-lg'>{locales.INGREDIENTS}</h2>
                 <div className='w-full relative bg-zinc-200 h-[3px]  mb-5 rounded-lg overflow-hidden after:w-6 after:bg-red-500 after:h-full after:left-0 after:top-0 after:absolute' />
-                <RecipeIngredientList ingredients={['200g masła', '100g cukru', '300g mąki', '100 ml mleka', 'op. cukru waniliowego','300g mąki', '100 ml mleka', 'op. cukru waniliowego']}/>
+                <RecipeIngredientList ingredients={getIngredientsNames()}/>
             </div>
             <div className='mt-10 w-full flex flex-col'>
                 <h2 className='mb-2 font-semibold text-lg'>{locales.PREPARATION}</h2>
                 <div className='w-full relative bg-zinc-200 h-[3px] my-2 rounded-lg overflow-hidden after:w-6 after:bg-red-500 after:h-full after:left-0 after:top-0 after:absolute' />
-                <div className='mt-5 flex flex-col w-full shadow-sm bg-white rounded-md px-4 py-2'>
-                    <h3 className='text-lg font-semibold mb-2 text-slate-400'>KROK 1</h3>
-                    <p>Żółtka oddzielamy od białek i ubijamy w misce z syropem klonowym oraz nasionkami laski wanilii. Do ubijanych żółtek stopniowo dodajemy rozpuszczone masło. Mieszamy tak długo, aż ciasto będzie miało jednolitą, aksamitną konsystencję.</p>
-                </div>
-                <div className='mt-5 flex flex-col w-full shadow-sm bg-white rounded-md px-4 py-2'>
-                    <h3 className='text-lg font-semibold mb-2 text-slate-400'>KROK 1</h3>
-                    <p>Żółtka oddzielamy od białek i ubijamy w misce z syropem klonowym oraz nasionkami laski wanilii. Do ubijanych żółtek stopniowo dodajemy rozpuszczone masło. Mieszamy tak długo, aż ciasto będzie miało jednolitą, aksamitną konsystencję.</p>
+                <div className='w-full flex flex-col'>
+                    {renderPreparationSteps()}
                 </div>
             </div>
         </div>
@@ -66,7 +73,9 @@ RecipeView.propTypes = {
     description: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
     difficulty: PropTypes.string.isRequired,
-    servings: PropTypes.number.isRequired
+    servings: PropTypes.number.isRequired,
+    ingredients: PropTypes.arrayOf(PropTypes.object).isRequired,
+    preparationSteps:  PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default RecipeView;

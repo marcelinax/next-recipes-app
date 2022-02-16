@@ -30,14 +30,14 @@ const recipe = new Schema({
         type: Number,
         required: true
     },
-    ingredients: [{
-        type: String,
+    ingredients: {
+        type: [Object],
         required: true
-    }],
-    preparationSteps: [{
-        type: String,
+    },
+    preparationSteps: {
+        type: [Object],
         required: true
-    }],
+    },
 });
 
 mongoose.models = {};
