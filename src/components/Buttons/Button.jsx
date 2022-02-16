@@ -4,16 +4,20 @@ import buttonTypes from '@constants/buttonTypes';
 import Link from 'next/link';
 const Button = ({ title, bgColor, textColor, onClick, type, borderColor, isLink = false, linkTo, icon, className }) => {
 
+    const getDefaultClassName = () => {
+        return 'flex items-center justify-center px-4 py-2 rounded-lg hover:scale-95 transition-all cursor-pointer';
+    };
+
     const drawOutlineButton = () => {
-        return <button type='button' onClick={onClick} className={`px-4 py-2 bg-transparent border-2 ${borderColor} rounded-lg ${textColor}  text-sm font-semibold hover:scale-95 transition-all cursor-pointer ${className}`}>{title}</button>;
+        return <button type='button' onClick={onClick} className={`${getDefaultClassName()} bg-transparent border-2 ${borderColor} ${textColor} text-sm font-semibold ${className}`}>{title}</button>;
     };
 
     const drawTextButton = () => {
-        return <button type='button' onClick={onClick} className={`px-4 py-2 ${bgColor} rounded-lg ${textColor} text-sm font-semibold hover:scale-95 transition-all cursor-pointer ${className}`}>{title}</button>;
+        return <button type='button' onClick={onClick} className={`${getDefaultClassName()} ${bgColor} ${textColor} text-sm font-semibold ${className}`}>{title}</button>;
     };
 
     const drawIconButton = () => {
-        return <button type='button' onClick={onClick} className={`px-4 py-2 ${bgColor} rounded-lg  text-sm font-semibold hover:scale-95 transition-all cursor-pointer ${className}`}>{icon}</button>;
+        return <button type='button' onClick={onClick} className={`${getDefaultClassName()} ${bgColor}  ${className}`}>{icon}</button>;
     };
 
     const getButtonByType = () => {

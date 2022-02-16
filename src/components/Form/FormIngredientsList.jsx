@@ -9,22 +9,21 @@ import { v4 as uuidv4 } from 'uuid';
 import messages from '@constants/messages';
 import { getFilteredErrorMessages } from '@utils/getFillteredErrorMessages';
 
-const FormIngredientsList = ({ setIngredients, ingredient, setIngredient, deleteIngredient }) => {
-
-    const [ingredientsItems, setIngredientsItems] = useState([]);
+const FormIngredientsList = ({ ingredients, setIngredients }) => {
+    
+    const [ingredient, setIngredient] = useState('');
     const [errors, setErrors] = useState([]);
 
     const onAddIngredient = () => {
         if (validate()) {
-            setIngredientsItems([...ingredientsItems, <FormIngredientListItem key={ingredient} id={uuidv4()} name={ingredient} />]);
-            setIngredients();
+            setIngredients([...ingredients, {ingredient, id: uuidv4()}]);
             setIngredient('');
             setErrors([]);
         }
     };
     
     const checkIngredientUniqueness = () => {
-        const existingIngredient = ingredientsItems.filter(item => item.props.name === ingredient);
+        const existingIngredient = ingredients.filter(item => item.name === ingredient);
         return existingIngredient.length > 0;
     };
 
@@ -44,16 +43,15 @@ const FormIngredientsList = ({ setIngredients, ingredient, setIngredient, delete
     };
 
     const renderIngredients = () => {
-        return ingredientsItems && ingredientsItems.map(ing => (
-            <FormIngredientListItem key={ing.key} name={ing.props.name} onDelete={() => onDeleteIngredientItem(ing.props.id)}/>
+        return ingredients && ingredients.map(ing => (
+            <FormIngredientListItem key={ing.id} name={ing.ingredient} onDelete={() => onDeleteIngredientItem(ing.id)}/>
         ));
     };
 
     const onDeleteIngredientItem = (id) => {
-        const ingredientIndex = ingredientsItems.findIndex(ingredient => ingredient.props.id === id);
-        ingredientsItems.splice(ingredientIndex, 1);
-        setIngredientsItems([...ingredientsItems]);
-        deleteIngredient(ingredientIndex);
+        const ingredientIndex = ingredients.findIndex(ingredient => ingredient.id === id);
+        ingredients.splice(ingredientIndex, 1);
+        setIngredients([...ingredients]);
     };
 
     const ingredientHandler = (e) => {
@@ -76,8 +74,7 @@ const FormIngredientsList = ({ setIngredients, ingredient, setIngredient, delete
 };
 
 FormIngredientsList.propTypes = {
-    error: PropTypes.string,
-    ingredient: PropTypes.string.isRequired,
+    ingredients: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default FormIngredientsList;

@@ -30,8 +30,6 @@ const Form = () => {
         ingredients: [],
         preparationSteps: []
     });
-    const [ingredient, setIngredient] = useState('');
-    const [step, setStep] = useState('');
     const [errors, setErrors] = useState([]);
 
     const inputHandler = (e) => {
@@ -92,17 +90,9 @@ const Form = () => {
             isValid = false;
             errs.push(messages.INGREDIENTS_CANNOT_BE_EMPTY);
         }
-        if (!ingredient) {
-            isValid = false;
-            errs.push(messages.INGREDIENT_CANNOT_BE_EMPTY);
-        }
         if (formData.preparationSteps.length < 1) {
             isValid = false;
             errs.push(messages.PREPARATION_STEPS_CANNOT_BE_EMPTY);
-        }
-        if (!step) {
-            isValid = false;
-            errs.push(messages.PREPARATION_STEP_CANNOT_BE_EMPTY);
         }
         setErrors([...errs]);
         return isValid;
@@ -113,7 +103,6 @@ const Form = () => {
         try {
             if (!validateForm()) {
                 await apiClient.post('create-recipe', {
-                
                     ...formData,
                     preparationTime: +formData.preparationTime, 
                     servings: +formData.servings
@@ -131,15 +120,6 @@ const Form = () => {
         setFormData({
             ...formData,
             photo: url
-        });
-    };
-
-    const onDeleteIngredient = (index) => {
-        const ingredientIndex = formData.ingredients.findIndex((_, i) => i === index);
-        formData.ingredients.splice(ingredientIndex, 1);
-        setFormData({
-            ...formData,
-            ingredients: [...formData.ingredients]
         });
     };
 
@@ -182,18 +162,16 @@ const Form = () => {
                     </FormRow>
                 </div>
                 <FormRow heading={locales.INGREDIENTS} width='w-full mt-5'>
-                    <FormIngredientsList ingredient={ingredient} setIngredient={setIngredient} setIngredients={() => setFormData({
+                    <FormIngredientsList ingredients={formData.ingredients} setIngredients={(ingredients) => setFormData({
                         ...formData,
-                        ingredients: [...formData.ingredients, ingredient]
-                    })
-                    }
-                    deleteIngredient={onDeleteIngredient}
+                        ingredients: [...ingredients]
+                    })}
                     />
                 </FormRow>
                 <FormRow heading={locales.PREPARATION} width='w-full mt-10'>
-                    <FormPreparationStepsList setStep={setStep} step={step} setSteps={() => setFormData({
+                    <FormPreparationStepsList steps={formData.preparationSteps} setSteps={(steps) => setFormData({
                         ...formData,
-                        preparationSteps: [...formData.preparationSteps, step]
+                        preparationSteps: [...steps]
                     })}
                     />
                 </FormRow>
