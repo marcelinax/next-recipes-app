@@ -7,6 +7,15 @@
 $gray: rgba(0, 0, 0, 0.5);
 $lightGray: #d6d3d1;
 
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 @keyframes fade {
     0%{
         opacity: 0;
@@ -40,5 +49,9 @@ body{
 
 .ingredient-item-animation, .preparation-step-animation {
     animation: 0.3s ease-in fade;
+}
+
+.spinner {
+    animation: spin 2s linear infinite;
 }
 

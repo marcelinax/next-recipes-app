@@ -1,6 +1,4 @@
 import constants from '@constants/constants';
-import difficulty from '@constants/difficulty';
-import foodCategory from '@constants/foodCategory';
 import mongoConnect from 'lib/mongoConnect';
 import Recipe from 'models/recipe';
 

@@ -105,7 +105,7 @@ const Form = () => {
         e.preventDefault();
         try {
             if (validateForm()) {
-                await apiClient.post('create-recipe', {
+                await apiClient.post('recipes', {
                     ...formData,
                     preparationTime: +formData.preparationTime, 
                     servings: +formData.servings

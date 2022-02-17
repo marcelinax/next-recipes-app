@@ -1,13 +1,17 @@
 import React from 'react';
 import { IoMdTime } from 'react-icons/io';
 import { IoPersonOutline } from 'react-icons/io5';
-import {IoCellular } from 'react-icons/io5';
+import { IoCellular, IoHeart, IoHeartOutline, IoTrashOutline } from 'react-icons/io5';
 import PropTypes from 'prop-types';
 import locales from '@locales';
 import { getDifficultyColor } from '@utils/getDifficultyColor';
 import RecipeIngredientList from '@components/Recipe/RecipeIngredientList';
 import RecipePreparationStepsItem from '@components/Recipe/RecipePreparationStepsItem';
-const RecipeView = ({ bgImg, title, description, servings, difficulty, time, ingredients, preparationSteps }) => {
+import { translateDifficulty } from '@utils/translateDifficulty';
+import Button from '@components/Buttons/Button';
+import buttonTypes from '@constants/buttonTypes';
+
+const RecipeView = ({ id, bgImg, title, description, servings, difficulty, time, ingredients, preparationSteps, isFavourite, onToggleIsFavourite }) => {
     
     const getIngredientsNames = () => {
         return ingredients && ingredients.map(ingredient => ingredient.ingredient);
@@ -21,7 +25,13 @@ const RecipeView = ({ bgImg, title, description, servings, difficulty, time, ing
 
     return (
         <div className='w-1/2 flex flex-col mx-auto mb-20'>
-            <h1 className='font-semibold text-3xl mb-5 drop-shadow-2xl'>{title}</h1>
+            <div className='w-full flex mb-5 items-center justify-between'>
+                <h1 className='font-semibold text-3xl drop-shadow-2xl mr-3 w-[90%]'>{title}</h1>
+                <div className='flex items-center'>
+                    <Button type={buttonTypes.ICON} onClick={onToggleIsFavourite} bgColor='bg-white' className='shadow-2xl px-1 py-1  mr-1' icon={isFavourite ? <IoHeart size={22} className='fill-red-600' /> : <IoHeartOutline size={22} className='stroke-red-600' />}/>
+                    <Button type={buttonTypes.ICON} onClick={onToggleIsFavourite} bgColor='bg-white' className='shadow-2xl px-1 py-1' icon={<IoTrashOutline size={22} className='stroke-black/50' /> }/>
+                </div>
+            </div>
             <div className='w-full flex flex-col h-[500px]'>
                 <div className='h-4/5 w-full bg-no-repeat bg-center bg-cover shadow-md rounded-md' style={{backgroundImage: `url(${bgImg})`}} />
                 <div className='w-full h-1/5 bg-white shadow-sm mt-1 flex py-2 items-center px-6 justify-around rounded-md'>
@@ -35,8 +45,8 @@ const RecipeView = ({ bgImg, title, description, servings, difficulty, time, ing
                     <div className='flex flex-col items-center basis-1/3'>
                         <p className='font-semibold'>{locales.DIFFICULTY}</p>
                         <div className='w-full flex items-center justify-center mt-1'>
-                            <IoCellular size={18} fill={getDifficultyColor(difficulty)}/>
-                            <p className='ml-2 text-gray-400'>{difficulty}</p>
+                            <IoCellular size={18} fill={getDifficultyColor(translateDifficulty(difficulty.toUpperCase()))}/>
+                            <p className='ml-2 text-gray-400'>{(translateDifficulty(difficulty.toUpperCase()))}</p>
                         </div>
                     </div>
                     <div className='flex flex-col basis-1/3 items-center'>
@@ -75,7 +85,8 @@ RecipeView.propTypes = {
     difficulty: PropTypes.string.isRequired,
     servings: PropTypes.number.isRequired,
     ingredients: PropTypes.arrayOf(PropTypes.object).isRequired,
-    preparationSteps:  PropTypes.arrayOf(PropTypes.object).isRequired,
+    preparationSteps: PropTypes.arrayOf(PropTypes.object).isRequired,
+    isFavourite: PropTypes.bool.isRequired
 };
 
 export default RecipeView;

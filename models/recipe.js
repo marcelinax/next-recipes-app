@@ -38,6 +38,11 @@ const recipe = new Schema({
         type: [Object],
         required: true
     },
+    isFavourite: {
+        type: Boolean,
+        required: true,
+        default: false
+    }
 });
 
 mongoose.models = {};

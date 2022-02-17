@@ -22,7 +22,7 @@ const RecipeListItem = ({ id, title, description, bgImg, category, difficulty, t
                     </div>
                     <div className='flex w-full flex-col h-1/2'>
                         <div className='w-full px-10 py-7 h-2/3'>
-                            <h1 className='text-center text-xl font-bold'>{title}</h1>
+                            <h1 className='text-center text-xl font-bold'>{title.toUpperCase()}</h1>
                             <p className='text-stone-400 mt-2 mb-3 text-center w-full line-clamp-2'>{description}</p>
                         </div>
                         <div className='w-full border-t-2 border-stone-100 flex h-1/3'>
@@ -35,7 +35,6 @@ const RecipeListItem = ({ id, title, description, bgImg, category, difficulty, t
                             <div className='basis-1/2 flex'>
                                 <div className='flex items-center w-full py-5 justify-center'>
                                     <IoCellular fill={getDifficultyColor(translateDifficulty(difficulty.toUpperCase()))} size={18} />
-                                    {console.log(difficulty)}
                                     <p className='ml-2 text-sm text-gray-400'>{(translateDifficulty(difficulty.toUpperCase()))}</p>
                                 </div>
                             </div>

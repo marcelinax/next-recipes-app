@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 import { useRefreshRecipes } from 'hooks/useRefreshRecipes';
 import Pagination from '@components/Global/Pagination';
 import constants from '@constants/constants';
+import Spinner from '@components/Global/Spinner';
+
 
 const Home = () => {
 
@@ -15,7 +17,7 @@ const Home = () => {
     const [difficultySelect, setDifficultySelect] = useState('all');
     const [category, setCategory] = useState('all');
     const recipes = useSelector(state => state.recipes.recipes);
-    const {refresh: refreshRecipes} = useRefreshRecipes();
+    const {refresh: refreshRecipes, loading} = useRefreshRecipes();
 
     useEffect(() => {
         renderRecipes();
@@ -66,12 +68,14 @@ const Home = () => {
             <div className='w-full flex px-6'>
                 {renderFoodCategoryItems()}
             </div>
-            <div className="w-full flex mt-5 flex-wrap">
-                {recipes && renderRecipes()}
+            <div className={`w-full flex mt-5 flex-wrap ${recipes.searchingRecipes.length < constants.LIMIT_PAGE && 'mb-5'}`}>
+                {(recipes && !loading) ? renderRecipes() : <Spinner/>}
             </div>
-            <div className='w-full flex items-center justify-center mt-20'>
-                <Pagination page={page} setPage={pageHandler} count={Math.ceil(recipes.totalRecipes / constants.LIMIT_PAGE )}/>
-            </div>
+            {recipes.searchingRecipes.length >= constants.LIMIT_PAGE &&
+                <div className={`w-full flex items-center justify-center mt-20 mb-10 ${recipes.searchingRecipes.length > constants.LIMIT_PAGE ? 'mt-10' : ''}`}>
+                    <Pagination page={page} setPage={pageHandler} count={Math.ceil(recipes.totalRecipes / constants.LIMIT_PAGE)} />
+                </div>
+            }
         </HomepageLayout>
     );
 };

@@ -19,4 +19,5 @@ export default {
     ADD_NEW_STEP: 'DODAJ KROK',
     SAVE: 'ZAPISZ',
     CANCEL: 'ANULUJ',
+    YOU_HAVE_ANY_FAVOURITE_RECIPES: 'Nie masz żadnych ulubionych przepisów'
 };

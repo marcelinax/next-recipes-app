@@ -3,7 +3,6 @@ import difficulty from '@constants/difficulty';
 
 export const translateDifficulty = (hardness) => {
     const [ALL, EASY, MEDIUM, HARD] = Object.keys(difficulty);
-    console.log(hardness);
     switch (hardness) {
     case ALL: 
         return constants.ALL;
