@@ -21,7 +21,7 @@ const CustomSelect = ({ value, setValue, label, options, width, margin, bgColor 
     }));
 
     const renderSelectOptions = () => {
-        return Object.entries(options).map(entry => [<CustomMenuItem value={entry[1]} key={entry[0]}>{entry[1].toUpperCase()}</CustomMenuItem>]); 
+        return Object.entries(options).map(entry => [<CustomMenuItem value={entry[0].toLowerCase()} key={entry[0]}>{entry[1].toUpperCase()}</CustomMenuItem>]); 
     };
     return (
         <Box className={`${width} ${margin} ${bgColor}`}>

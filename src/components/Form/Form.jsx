@@ -20,6 +20,7 @@ import { useRouter } from 'next/router';
 const Form = () => {
 
     const difficultyOptions = { ...difficulty };
+    const foodCategoryOptions = { ...foodCategory };
     const router = useRouter();
     const [formData, setFormData] = useState({
         title: '',
@@ -136,7 +137,7 @@ const Form = () => {
                 </FormRow>
                 <div className='w-full flex mb-5'>
                     <FormRow heading={locales.CATEGORY} width='basis-1/2'>
-                        <CustomSelect value={formData.category} setValue={(e) => selectHandler(e, constants.CATEGORY)} options={foodCategory.singular} bgColor='bg-white' width='w-full' error={getFilteredErrorMessages(errors, messages.CHOOSE_CATEGORY)}/>
+                        <CustomSelect value={formData.category} setValue={(e) => selectHandler(e, constants.CATEGORY)} options={delete foodCategoryOptions['ALL'], foodCategoryOptions} bgColor='bg-white' width='w-full' error={getFilteredErrorMessages(errors, messages.CHOOSE_CATEGORY)}/>
                     </FormRow>
                     <FormRow heading={locales.DIFFICULTY} width='basis-1/2' className='ml-6'>
                         <CustomSelect value={formData.difficulty} setValue={(e) => selectHandler(e, constants.DIFFICULTY)} options={delete difficultyOptions['ALL'], difficultyOptions} bgColor='bg-white' width='w-full' error={getFilteredErrorMessages(errors, messages.CHOOSE_DIFFICULTY)}/>

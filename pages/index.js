@@ -10,7 +10,8 @@ import difficulty from '@constants/difficulty';
 const Home = () => {
 
     const [search, setSearch] = useState(''); 
-    const [difficultySelect, setDifficultySelect] = useState(difficulty.ALL);
+    const [difficultySelect, setDifficultySelect] = useState('all');
+    const [category, setCategory] = useState('all');
     const recipes = useSelector(state => state.recipes.recipes);
     const {refresh: refreshRecipes} = useRefreshRecipes();
 
@@ -20,20 +21,19 @@ const Home = () => {
 
     useEffect(() => {
         rerenderRecipes();
-    }, [search, difficultySelect]);
+    }, [search, difficultySelect, category]);
     
 
     const rerenderRecipes = () => {
         refreshRecipes({
             query: search,
-            hardness: difficultySelect
+            hardness: difficultySelect,
+            cat: category
         });
     };
     
     const renderFoodCategoryItems = () => {
-        return Object.values(foodCategory.plural).map(category => (
-            <FoodCategoryItem key={category} category={category}/>
-        ));
+        return Object.entries(foodCategory).map(entry => [<FoodCategoryItem key={entry[0]} category={entry[1]} isChosen={category === entry[0].toLowerCase()} onClick={() => categoryHandler(entry[0].toLowerCase())}/>]);
     };
     const renderRecipes = () => {
         return recipes && recipes.searchingRecipes.map(recipe => (
@@ -45,8 +45,13 @@ const Home = () => {
     const searchHandler = (e) => {
         setSearch(e.target.value);
     };
+
     const difficultySelectHandler = (e) => {
         setDifficultySelect(e.target.value);
+    };
+
+    const categoryHandler = (category) => {
+        setCategory(category);
     };
 
     return (
@@ -60,20 +65,5 @@ const Home = () => {
         </HomepageLayout>
     );
 };
-
-// export const getServerSideProps = async ({req}) => {
-//     // const res = await apiClient.get('recipes');
-//     // const recipes = res.data;
-//     // return { props: { recipes } };
-//     const {query} = req;
-    
-//     const res = await apiClient.post('recipes/search', {
-//         page: 1
-//     });
-//     console.log(query);
-//     const recipes = res.data;
-//     return {props: {recipes}};
-// };
-
 
 export default Home;
