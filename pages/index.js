@@ -5,7 +5,6 @@ import RecipeListItem from './../src/components/Recipe/RecipeListItem';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useRefreshRecipes } from 'hooks/useRefreshRecipes';
-import difficulty from '@constants/difficulty';
 
 const Home = () => {
 

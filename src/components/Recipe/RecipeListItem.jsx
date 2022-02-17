@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { getDifficultyColor } from '@utils/getDifficultyColor';
 import locales from '@locales';
+import { translateCategory } from '@utils/translateCategory';
+import { translateDifficulty } from '@utils/translateDifficulty';
 const RecipeListItem = ({ id, title, description, bgImg, category, difficulty, time }) => {
     return (
         <Link href={{
@@ -15,7 +17,7 @@ const RecipeListItem = ({ id, title, description, bgImg, category, difficulty, t
                 <div className='w-full h-full flex flex-col shadow-md rounded-lg bg-white overflow-hidden cursor-pointer group hover:scale-95 transition-all'>
                     <div className='h-1/2 w-full bg-no-repeat bg-cover bg-center relative group-hover:opacity-90' style={{backgroundImage: `url(${bgImg})`}} >
                         <div className='absolute top-5 right-5 bg-black/40 py-2 px-3 rounded-lg'>
-                            <p className='text-white text-sm font-semibold'>{category.toUpperCase()}</p>
+                            <p className='text-white text-sm font-semibold'>{translateCategory(category.toUpperCase())}</p>
                         </div>
                     </div>
                     <div className='flex w-full flex-col h-1/2'>
@@ -32,8 +34,9 @@ const RecipeListItem = ({ id, title, description, bgImg, category, difficulty, t
                             </div>
                             <div className='basis-1/2 flex'>
                                 <div className='flex items-center w-full py-5 justify-center'>
-                                    <IoCellular fill={getDifficultyColor(difficulty)} size={18}/>
-                                    <p className='ml-2 text-sm text-gray-400'>{difficulty}</p>
+                                    <IoCellular fill={getDifficultyColor(translateDifficulty(difficulty.toUpperCase()))} size={18} />
+                                    {console.log(difficulty)}
+                                    <p className='ml-2 text-sm text-gray-400'>{(translateDifficulty(difficulty.toUpperCase()))}</p>
                                 </div>
                             </div>
 
