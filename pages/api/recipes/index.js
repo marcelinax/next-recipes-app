@@ -11,7 +11,6 @@ export default async (req, res) => {
             const recipes = await Recipe.find();
             res.status(200).json(recipes);
         } catch (error) {
-            console.log(error);
             res.status(500).json({ error });
         }
         break;
@@ -22,10 +21,9 @@ export default async (req, res) => {
             const recipe = await Recipe.create({
                 ...data
             });
-            
             res.status(200).json(recipe);
-        } catch (error) {
-            console.error(error);
+        }
+        catch (error) {
             res.status(404).json({error});
         }
         break;

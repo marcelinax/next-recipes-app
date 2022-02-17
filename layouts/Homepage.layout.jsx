@@ -6,14 +6,14 @@ import Layout from '@layouts/Layout';
 import locales from '@locales';
 import React from 'react';
 
-const HomepageLayout = ({children}) => {
+const HomepageLayout = ({ children, search, setSearch, difficultySelect, setDifficultySelect }) => {
     return (
-        <Layout>
+        <Layout includesHomepageLayout={true}>
             <div className='w-full shadow-inner bg-white py-10'>
                 <div className='container mx-auto px-6'>
                     <div className='w-full flex'>
-                        <Search/>
-                        <CustomSelect options={difficulty} label={locales.DIFFICULTY} width='w-40' margin='ml-3'/>
+                        <Search value={search} setValue={setSearch}/>
+                        <CustomSelect value={difficultySelect} setValue={setDifficultySelect} options={difficulty} label={locales.DIFFICULTY} width='w-40' margin='ml-3'/>
                     </div>
                 </div>
             </div>

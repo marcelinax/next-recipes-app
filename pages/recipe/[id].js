@@ -5,7 +5,9 @@ import React from 'react';
 
 const Recipe = ({ recipe }) => {
     return (
-        recipe && <RecipeView ingredients={recipe.ingredients} preparationSteps={recipe.preparationSteps} title={recipe.title} servings={recipe.servings} time={recipe.preparationTime} difficulty={recipe.difficulty} bgImg={recipe.photo} description={recipe.description}/>  
+        <Layout>
+            {recipe && <RecipeView ingredients={recipe.ingredients} preparationSteps={recipe.preparationSteps} title={recipe.title} servings={recipe.servings} time={recipe.preparationTime} difficulty={recipe.difficulty} bgImg={recipe.photo} description={recipe.description}/> }
+        </Layout>
     );
 };
 
@@ -20,16 +22,6 @@ export const getServerSideProps = async (context) => {
    
     const recipe = res.data;
     return {props: {recipe}};
-};
-
-
-Recipe.getLayout = function getLayout(page) {
-    return (
-        <Layout>
-            <></>
-            {page}
-        </Layout>
-    );
 };
 
 export default Recipe;

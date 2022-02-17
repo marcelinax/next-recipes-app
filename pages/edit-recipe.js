@@ -2,12 +2,13 @@ import Form from '@components/Form/Form';
 import Layout from '@layouts/Layout';
 
 
-const CreateRecipe = () => {
+const EditRecipe = () => {
     return (
-        <Layout >
+        <Layout>
             <Form />
         </Layout>
     );
 };
 
-export default CreateRecipe;
+
+export default EditRecipe;

@@ -2,13 +2,14 @@ import React from 'react';
 import Header from '../src/components/Composition/Header';
 
 
-const Layout = ({ children }) => {
+const Layout = ({ children, includesHomepageLayout = false }) => {
+
     return (
         <>
             <Header />
-            {children[0]}
+            {includesHomepageLayout && children[0]}
             <div className='container mx-auto flex flex-col mt-10'>
-                {children[1]}
+                {includesHomepageLayout ? children[1] : children}
             </div>
         </>
     );

@@ -10,11 +10,22 @@ export default async (req, res) => {
         try {
             const { id } = req.query;
             const recipe = await Recipe.findById(id);
-            console.log(recipe);
             res.status(200).json(recipe);
-        } catch (error) {
-            console.log(error);
+        }
+        catch (error) {
             res.status(500).json({ error });
+        }
+        break;
+    }
+    case 'PUT': {
+        try {
+            const { id } = req.query;
+            const data = req.body;
+            const recipe = await Recipe.findByIdAndUpdate(id , {...data}, {new: true});
+            res.status(200).json(recipe);
+        }
+        catch (error) {
+            res.status(403).json({ error });
         }
         break;
     }
