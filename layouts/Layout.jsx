@@ -1,9 +1,11 @@
 import { apiClient } from 'api/apiClient';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import { setFavouriteRecipes } from 'store/recipesSlice';
+import colors from 'themes/colors';
 import Header from '../src/components/Composition/Header';
-
+import 'react-toastify/dist/ReactToastify.css';
 
 const Layout = ({ children, includesHomepageLayout = false }) => {
 
@@ -24,6 +26,10 @@ const Layout = ({ children, includesHomepageLayout = false }) => {
 
     return (
         <div className='min-h-screen max-w-screen'>
+            <ToastContainer
+                position="top-center"
+                theme='colored'
+            />
             <Header/>
             {includesHomepageLayout && children[0]}
             <div className='container mx-auto flex flex-col mt-10'>

@@ -12,6 +12,7 @@ import Button from '@components/Buttons/Button';
 import buttonTypes from '@constants/buttonTypes';
 import { apiClient } from 'api/apiClient';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 const RecipeView = ({ id, bgImg, title, description, servings, difficulty, time, ingredients, preparationSteps, isFavourite, onToggleIsFavourite }) => {
     
@@ -21,6 +22,7 @@ const RecipeView = ({ id, bgImg, title, description, servings, difficulty, time,
             await apiClient.delete(`recipe/${id}`, {
                 id
             });
+            toast.success(locales.RECIPE_HAS_BEEN_DELETED);
             router.push('/');
         } catch (error) {
             console.log(error);
@@ -36,6 +38,8 @@ const RecipeView = ({ id, bgImg, title, description, servings, difficulty, time,
             <RecipePreparationStepsItem key={step.id} description={step.description} step={index + 1}/>
         ));
     };
+
+   
 
     return (
         <div className='w-1/2 flex flex-col mx-auto mb-20'>
