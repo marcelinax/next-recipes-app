@@ -1,3 +1,4 @@
+import constants from '@constants/constants';
 import difficulty from '@constants/difficulty';
 import foodCategory from '@constants/foodCategory';
 import mongoConnect from 'lib/mongoConnect';
@@ -25,7 +26,7 @@ export default async (req, res) => {
         const totalRecipes = searchingRecipes.length;
 
         if (page) {
-            const limit = 1;
+            const limit = constants.LIMIT_PAGE;
             let startIndex = (page - 1) * limit;
             let endIndex = page * limit;
 
