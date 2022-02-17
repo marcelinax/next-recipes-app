@@ -52,7 +52,7 @@ RecipeListItem.propTypes = {
     bgImg: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     difficulty: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
+    time: PropTypes.number.isRequired,
 };
 
 export default RecipeListItem;

@@ -4,20 +4,20 @@ import { apiClient } from 'api/apiClient';
 import React from 'react';
 
 const Recipe = ({ recipe }) => {
-    
-
     return (
-        recipe && <RecipeView ingredients={recipe.ingredients} preparationSteps={recipe.preparationSteps} title={recipe.title} servings={recipe.servings} time={recipe.preparationTime} difficulty={recipe.difficulty} bgImg={recipe.photo} description={recipe.description}/>
-        
+        recipe && <RecipeView ingredients={recipe.ingredients} preparationSteps={recipe.preparationSteps} title={recipe.title} servings={recipe.servings} time={recipe.preparationTime} difficulty={recipe.difficulty} bgImg={recipe.photo} description={recipe.description}/>  
     );
 };
 
 export const getServerSideProps = async (context) => {
-    const res = await apiClient.get('get-recipe', {
+
+    const id = context.params.id;
+    const res = await apiClient.get(`recipe/${id}`, {
         params: {
-            id: context.params.id
+            id
         }
     });
+   
     const recipe = res.data;
     return {props: {recipe}};
 };

@@ -71,7 +71,7 @@ RecipeView.propTypes = {
     bgImg: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
+    time: PropTypes.number.isRequired,
     difficulty: PropTypes.string.isRequired,
     servings: PropTypes.number.isRequired,
     ingredients: PropTypes.arrayOf(PropTypes.object).isRequired,

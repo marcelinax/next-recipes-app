@@ -29,7 +29,7 @@ const Home = ({ recipes }) => {
 };
 
 export const getServerSideProps = async () => {
-    const res = await apiClient.get('get-recipes');
+    const res = await apiClient.get('recipes');
     const recipes = res.data;
     return {props: {recipes}};
 };
