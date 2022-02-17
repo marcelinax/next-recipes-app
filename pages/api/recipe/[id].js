@@ -29,5 +29,16 @@ export default async (req, res) => {
         }
         break;
     }
+    case 'DELETE': {
+        try {
+            const { id } = req.query;
+            await Recipe.findByIdAndDelete(id);
+            res.status(200).end();
+        }
+        catch (error) {
+            res.status(500).json({ error });
+        }
+        break;
+    }
     }
 };

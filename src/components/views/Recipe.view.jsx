@@ -10,9 +10,23 @@ import RecipePreparationStepsItem from '@components/Recipe/RecipePreparationStep
 import { translateDifficulty } from '@utils/translateDifficulty';
 import Button from '@components/Buttons/Button';
 import buttonTypes from '@constants/buttonTypes';
+import { apiClient } from 'api/apiClient';
+import { useRouter } from 'next/router';
 
 const RecipeView = ({ id, bgImg, title, description, servings, difficulty, time, ingredients, preparationSteps, isFavourite, onToggleIsFavourite }) => {
     
+    const router = useRouter();
+    const onDeleteRecipe = async () => {
+        try {
+            await apiClient.delete(`recipe/${id}`, {
+                id
+            });
+            router.push('/');
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const getIngredientsNames = () => {
         return ingredients && ingredients.map(ingredient => ingredient.ingredient);
     };
@@ -29,7 +43,7 @@ const RecipeView = ({ id, bgImg, title, description, servings, difficulty, time,
                 <h1 className='font-semibold text-3xl drop-shadow-2xl mr-3 w-[90%]'>{title}</h1>
                 <div className='flex items-center'>
                     <Button type={buttonTypes.ICON} onClick={onToggleIsFavourite} bgColor='bg-white' className='shadow-2xl px-1 py-1  mr-1' icon={isFavourite ? <IoHeart size={22} className='fill-red-600' /> : <IoHeartOutline size={22} className='stroke-red-600' />}/>
-                    <Button type={buttonTypes.ICON} onClick={onToggleIsFavourite} bgColor='bg-white' className='shadow-2xl px-1 py-1' icon={<IoTrashOutline size={22} className='stroke-black/50' /> }/>
+                    <Button type={buttonTypes.ICON} onClick={onDeleteRecipe} bgColor='bg-white' className='shadow-2xl px-1 py-1' icon={<IoTrashOutline size={22} className='stroke-black/50' /> }/>
                 </div>
             </div>
             <div className='w-full flex flex-col h-[500px]'>
@@ -78,6 +92,7 @@ const RecipeView = ({ id, bgImg, title, description, servings, difficulty, time,
 };
 
 RecipeView.propTypes = {
+    id: PropTypes.string.isRequired,
     bgImg: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
