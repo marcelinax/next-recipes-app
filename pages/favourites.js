@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 const Favourites = () => {
     
     const favouriteRecipes = useSelector(state => state.recipes.favouriteRecipes);
-    console.log(favouriteRecipes);
     
     const renderRecipes = () => {
         return favouriteRecipes && favouriteRecipes.map(recipe => (
@@ -30,12 +29,5 @@ const Favourites = () => {
         </Layout>
     );
 };
-
-// export const getServerSideProps = async () => {
-
-//     const res = await apiClient.get('recipes/favourites');
-//     const favouriteRecipes = res.data;
-//     return {props: {favouriteRecipes}};
-// };
 
 export default Favourites;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IoMdTime } from 'react-icons/io';
 import { IoPersonOutline, IoPencil } from 'react-icons/io5';
 import { IoCellular, IoHeart, IoHeartOutline, IoTrashOutline } from 'react-icons/io5';
@@ -13,10 +13,12 @@ import buttonTypes from '@constants/buttonTypes';
 import { apiClient } from 'api/apiClient';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import Modal from '@components/Composition/Modal';
 
 const RecipeView = ({ id, bgImg, title, description, servings, difficulty, time, ingredients, preparationSteps, isFavourite, onToggleIsFavourite }) => {
     
     const router = useRouter();
+    const [showModal, setShowModal] = useState(false);
     const onDeleteRecipe = async () => {
         try {
             await apiClient.delete(`recipe/${id}`, {
@@ -42,13 +44,14 @@ const RecipeView = ({ id, bgImg, title, description, servings, difficulty, time,
    
 
     return (
-        <div className='w-full px-2 md:px-0 md:w-3/4 lg:w-2/3 flex flex-col mx-auto mb-20'>
+        <div className='w-full px-2 md:px-0 md:w-3/4 lg:w-2/3 xl:w-1/2 flex flex-col mx-auto mb-20'>
+            <Modal isOpen={showModal} title={locales.ARE_YOU_SURE_YOU_WANT_TO_DELETE_RECIPE} description={locales.THIS_ACTION_CANNOT_BE_UNDONE} onConfirm={onDeleteRecipe} onCancel={()=> setShowModal(false) }/>
             <div className='w-full flex flex-col md:flex-row mb-5 md:items-center md:justify-between'>
                 <h1 className='font-semibold text-3xl drop-shadow-2xl mr-3 w-[90%]'>{title}</h1>
                 <div className='flex items-center mt-2 md:mt-0'>
                     <Button type={buttonTypes.ICON} onClick={onToggleIsFavourite} bgColor='bg-white' className='shadow-2xl px-1 py-1 mr-1' icon={isFavourite ? <IoHeart size={22} className='fill-red-600' /> : <IoHeartOutline size={22} className='stroke-red-600' />}/>
                     <Button type={buttonTypes.ICON} onClick={()=> router.push(`/edit-recipe/${id}`)} bgColor='bg-white' className='shadow-2xl px-1 py-1 mr-1' icon={<IoPencil size={22} className='stroke-black/50' /> }/>
-                    <Button type={buttonTypes.ICON} onClick={onDeleteRecipe} bgColor='bg-white' className='shadow-2xl px-1 py-1' icon={<IoTrashOutline size={22} className='stroke-black/50' /> }/>
+                    <Button type={buttonTypes.ICON} onClick={() => setShowModal(true)} bgColor='bg-white' className='shadow-2xl px-1 py-1' icon={<IoTrashOutline size={22} className='stroke-black/50' /> }/>
                 </div>
             </div>
             <div className='w-full flex flex-col h-[500px]'>

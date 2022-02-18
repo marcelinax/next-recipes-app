@@ -22,5 +22,8 @@ export default {
     CANCEL: 'ANULUJ',
     YOU_HAVE_ANY_FAVOURITE_RECIPES: 'Nie masz żadnych ulubionych przepisów',
     RECIPE_HAS_BEEN_DELETED: 'Przepis pomyślnie usunięty',
-    RECIPE_HAS_BEEN_EDITED: 'Przepis pomyślnie zedytowany'
+    RECIPE_HAS_BEEN_EDITED: 'Przepis pomyślnie zedytowany',
+    CONFIRM: 'POTWIERDŹ',
+    ARE_YOU_SURE_YOU_WANT_TO_DELETE_RECIPE: 'Jesteś pewien, że chcesz usunąć przepis?',
+    THIS_ACTION_CANNOT_BE_UNDONE: 'Tej czynności nie będziesz mógł cofnąć!'
 };
