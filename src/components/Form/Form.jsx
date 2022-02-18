@@ -21,7 +21,7 @@ const Form = ({ recipe, onSubmit, formType, formData, errors, validateForm, inpu
     const foodCategoryOptions = { ...foodCategory };
 
     return (
-        <div className='w-3/4 flex mx-auto flex-col mb-10'>
+        <div className='w-full px-3 lg:px-0 lg:w-3/4 flex mx-auto flex-col mb-10'>
             <form onSubmit={onSubmit}>
                 <FormRow heading={locales.TITLE} width='w-full'>
                     <Input id='title' width='w-full' value={formData.title} setValue={inputHandler} error={getFilteredErrorMessages(errors, messages.TITLE_CANNOT_BE_EMPTY)}/>
@@ -29,22 +29,22 @@ const Form = ({ recipe, onSubmit, formType, formData, errors, validateForm, inpu
                 <FormRow heading={locales.DESCRIPTION} width='w-full'>
                     <Textarea id='description' width='w-full' cols='40' rows='3' value={formData.description} setValue={inputHandler} error={getFilteredErrorMessages(errors, messages.DESCRIPTION_CANNOT_BE_EMPTY)}/>
                 </FormRow>
-                <div className='w-full flex mb-5'>
-                    <FormRow heading={locales.CATEGORY} width='basis-1/2'>
+                <div className='w-full flex flex-col md:flex-row mb-5'>
+                    <FormRow heading={locales.CATEGORY} width='w-full md:basis-1/2'>
                         <CustomSelect value={formData.category} setValue={(e) => selectHandler(e, constants.CATEGORY)} options={delete foodCategoryOptions['ALL'], foodCategoryOptions} bgColor='bg-white' width='w-full' error={getFilteredErrorMessages(errors, messages.CHOOSE_CATEGORY)}/>
                     </FormRow>
-                    <FormRow heading={locales.DIFFICULTY} width='basis-1/2' className='ml-6'>
+                    <FormRow heading={locales.DIFFICULTY} width='w-full md:basis-1/2' className='md:ml-6'>
                         <CustomSelect value={formData.difficulty} setValue={(e) => selectHandler(e, constants.DIFFICULTY)} options={delete difficultyOptions['ALL'], difficultyOptions} bgColor='bg-white' width='w-full' error={getFilteredErrorMessages(errors, messages.CHOOSE_DIFFICULTY)}/>
                     </FormRow>
                 </div>
-                <div className='w-full flex'>
-                    <FormRow heading={locales.PREPARATION_TIME_IN_MINUTES} width='basis-1/3'>
+                <div className='w-full flex flex-col xl:flex-row'>
+                    <FormRow heading={locales.PREPARATION_TIME_IN_MINUTES} width='w-full xl:basis-1/3'>
                         <Input id='preparationTime' width='w-full' value={+formData.preparationTime} setValue={inputHandler} error={getFilteredErrorMessages(errors, messages.PREPARATION_TIME_CANNOT_BE_EMPTY) || getFilteredErrorMessages(errors, messages.INVALID_DATA)}/>
                     </FormRow>
-                    <FormRow heading={locales.AMOUNT_OF_SERVINGS} width='basis-1/3' className='ml-6'>
+                    <FormRow heading={locales.AMOUNT_OF_SERVINGS} width='w-full xl:basis-1/3' className='xl:ml-6'>
                         <Input id='servings' width='w-full' value={+formData.servings} setValue={inputHandler} error={getFilteredErrorMessages(errors, messages.SERVINGS_CANNOT_BE_EMPTY) || getFilteredErrorMessages(errors, messages.INVALID_DATA)}/>
                     </FormRow>
-                    <FormRow heading={formType === formTypes.CREATE ? locales.CHOOSE_PHOTO : locales.CHOOSE_NEW_PHOTO} width='basis-1/3' className='ml-6'>
+                    <FormRow heading={formType === formTypes.CREATE ? locales.CHOOSE_PHOTO : locales.CHOOSE_NEW_PHOTO} width='w-full xl:basis-1/3' className='xl:ml-6'>
                         <div>
                             <input onChange={imageFileHandler} type="file" accept="image/jpeg" className="block w-full mt-1 text-sm text-black/50 font-semibold 
                         file:mr-4 file:py-3 file:px-6

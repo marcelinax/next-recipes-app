@@ -65,7 +65,7 @@ const Home = () => {
 
     return (
         <HomepageLayout search={search} setSearch={searchHandler} difficultySelect={difficultySelect} setDifficultySelect={difficultySelectHandler}>
-            <div className='w-full flex px-6'>
+            <div className='w-full flex flex-wrap px-6'>
                 {renderFoodCategoryItems()}
             </div>
             <div className={`w-full flex mt-5 flex-wrap ${recipes.searchingRecipes.length < constants.LIMIT_PAGE && 'mb-5'}`}>

@@ -59,12 +59,12 @@ const FormIngredientsList = ({ ingredients, setIngredients }) => {
     };
 
     return (
-        <div className='w-full flex'>
-            <div className='basis-1/2 flex flex-col'>
+        <div className='w-full flex flex-col md:flex-row'>
+            <div className='w-full md:basis-1/2 flex flex-col'>
                 <Input id='ingredient' width='w-full' setValue={ingredientHandler} value={ingredient} error={getFilteredErrorMessages(errors, messages.INGREDIENT_CANNOT_BE_EMPTY) || getFilteredErrorMessages(errors, messages.INGREDIENT_ALREADY_EXISTS)}/>
                 <Button onClick={onAddIngredient} type={buttonTypes.TEXT} bgColor='bg-black/50' textColor='text-white' title={locales.ADD_NEW_INGREDIENT} className='mt-5 w-fit'/>
             </div>
-            <div className='basis-1/2 ml-5'>
+            <div className='w-full md:basis-1/2 md:ml-5 mt-8 md:mt-0'>
                 <div className='w-full p-5 bg-zinc-200 rounded-lg shadow-inner h-44 max-h-44 overflow-y-auto scrollbar'>
                     {renderIngredients()}
                 </div>

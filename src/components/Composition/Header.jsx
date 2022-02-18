@@ -12,13 +12,13 @@ const Header = () => {
 
     return (
         <div className='w-full bg-black/20 shadow-md'>
-            <div className='container mx-auto py-10 flex justify-between items-center'>
+            <div className='container mx-auto px-3 lg:px-0 py-10 flex flex-col md:flex-row md:justify-between md:items-center'>
                 <Link href='/'>
                     <a className='text-white font-bold text-3xl'>{locales.RECIPES_WORLD}</a>
                 </Link>
-                <div className='flex items-center'>
+                <div className='flex items-center mt-4 md:mt-0'>
                     <Button bgColor='bg-white' textColor='text-black/40' title={locales.NEW_RECIPE} type={buttonTypes.TEXT} isLink={true} linkTo='/create-recipe' className='mr-5'/>
-                    <div className='flex relative cursor-pointer'>
+                    <div className='flex relative cursor-pointer md:mr-5'>
                         <Link href='/favourites'>
                             <a>
                                 <IoIosHeartEmpty size={25} className='fill-white' />

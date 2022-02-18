@@ -42,10 +42,10 @@ const RecipeView = ({ id, bgImg, title, description, servings, difficulty, time,
    
 
     return (
-        <div className='w-1/2 flex flex-col mx-auto mb-20'>
-            <div className='w-full flex mb-5 items-center justify-between'>
+        <div className='w-full px-2 md:px-0 md:w-3/4 lg:w-2/3 flex flex-col mx-auto mb-20'>
+            <div className='w-full flex flex-col md:flex-row mb-5 md:items-center md:justify-between'>
                 <h1 className='font-semibold text-3xl drop-shadow-2xl mr-3 w-[90%]'>{title}</h1>
-                <div className='flex items-center'>
+                <div className='flex items-center mt-2 md:mt-0'>
                     <Button type={buttonTypes.ICON} onClick={onToggleIsFavourite} bgColor='bg-white' className='shadow-2xl px-1 py-1 mr-1' icon={isFavourite ? <IoHeart size={22} className='fill-red-600' /> : <IoHeartOutline size={22} className='stroke-red-600' />}/>
                     <Button type={buttonTypes.ICON} onClick={()=> router.push(`/edit-recipe/${id}`)} bgColor='bg-white' className='shadow-2xl px-1 py-1 mr-1' icon={<IoPencil size={22} className='stroke-black/50' /> }/>
                     <Button type={buttonTypes.ICON} onClick={onDeleteRecipe} bgColor='bg-white' className='shadow-2xl px-1 py-1' icon={<IoTrashOutline size={22} className='stroke-black/50' /> }/>
@@ -53,22 +53,22 @@ const RecipeView = ({ id, bgImg, title, description, servings, difficulty, time,
             </div>
             <div className='w-full flex flex-col h-[500px]'>
                 <div className='h-4/5 w-full bg-no-repeat bg-center bg-cover shadow-md rounded-md' style={{backgroundImage: `url(${bgImg})`}} />
-                <div className='w-full h-1/5 bg-white shadow-sm mt-1 flex py-2 items-center px-6 justify-around rounded-md'>
-                    <div className='flex flex-col basis-1/3 items-center'>
+                <div className='w-full md:h-1/5 bg-white shadow-sm mt-1 flex flex-col md:flex-row py-2 items-center px-6 justify-around rounded-md'>
+                    <div className='flex flex-col items-center md:basis-1/3 mb-2 md:mb-0'>
                         <p className='font-semibold'>{locales.PREPARATION_TIME}</p>
                         <div className='w-full flex items-center justify-center mt-1'>
                             <IoMdTime size={18} className="fill-gray-400"/>
                             <p className='ml-2 text-gray-400'>{time} {locales.MINUTES}</p>
                         </div>
                     </div>
-                    <div className='flex flex-col items-center basis-1/3'>
+                    <div className='flex flex-col items-center md:basis-1/3 mb-2 md:mb-0'>
                         <p className='font-semibold'>{locales.DIFFICULTY}</p>
                         <div className='w-full flex items-center justify-center mt-1'>
                             <IoCellular size={18} fill={getDifficultyColor(translateDifficulty(difficulty.toUpperCase()))}/>
                             <p className='ml-2 text-gray-400'>{(translateDifficulty(difficulty.toUpperCase()))}</p>
                         </div>
                     </div>
-                    <div className='flex flex-col basis-1/3 items-center'>
+                    <div className='flex flex-col md:basis-1/3 items-center'>
                         <p className='font-semibold'>{locales.AMOUNT_OF_SERVINGS}</p>
                         <div className='w-full flex items-center justify-center mt-1'>
                             <IoPersonOutline size={18} className="stroke-gray-400"/>

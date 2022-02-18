@@ -1,20 +1,18 @@
-
 import Search from '@components/Global/Search';
 import CustomSelect from '@components/Inputs/CustomSelect';
 import difficulty from '@constants/difficulty';
 import Layout from '@layouts/Layout';
 import locales from '@locales';
 import React from 'react';
-import { toast } from 'react-toastify';
 
 const HomepageLayout = ({ children, search, setSearch, difficultySelect, setDifficultySelect }) => {
     return (
         <Layout includesHomepageLayout={true}>
             <div className='w-full shadow-inner bg-white py-10'>
                 <div className='container mx-auto px-6'>
-                    <div className='w-full flex'>
+                    <div className='w-full flex flex-col md:flex-row'>
                         <Search value={search} setValue={setSearch}/>
-                        <CustomSelect value={difficultySelect} setValue={setDifficultySelect} options={difficulty} label={locales.DIFFICULTY} width='w-40' margin='ml-3'/>
+                        <CustomSelect value={difficultySelect} setValue={setDifficultySelect} options={difficulty} label={locales.DIFFICULTY} width='w-full md:w-1/2 lg:w-40' margin='md:ml-3'/>
                     </div>
                 </div>
             </div>

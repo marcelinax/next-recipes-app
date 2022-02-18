@@ -13,7 +13,7 @@ const RecipeListItem = ({ id, title, description, bgImg, category, difficulty, t
             pathname: '/recipe/[id]',
             query:{id}
         }}>
-            <a className='p-6 basis-1/3 max-w-[33.3333%] h-[470px] relative'>
+            <a className='p-6 w-full md:basis-1/2 xl:basis-1/3 md:max-w-1/2 xl:max-w-[33.3333%] h-[470px] relative'>
                 <div className='w-full h-full flex flex-col shadow-md rounded-lg bg-white overflow-hidden cursor-pointer group hover:scale-95 transition-all'>
                     <div className='h-1/2 w-full bg-no-repeat bg-cover bg-center relative group-hover:opacity-90' style={{backgroundImage: `url(${bgImg})`}} >
                         <div className='absolute top-5 right-5 bg-black/40 py-2 px-3 rounded-lg'>
