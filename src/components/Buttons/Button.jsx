@@ -37,9 +37,9 @@ const Button = ({ title, bgColor, textColor, onClick, type, borderColor, isLink 
 };
 
 Button.propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     bgColor: PropTypes.string,
-    textColor: PropTypes.string.isRequired,
+    textColor: PropTypes.string,
     type: PropTypes.string.isRequired,
     borderColor: PropTypes.string,
     isLink: PropTypes.bool,

@@ -15,10 +15,12 @@ export default {
     CATEGORY: 'Kategoria',
     DESCRIPTION: 'Opis',
     CHOOSE_PHOTO: 'Wybierz zdjęcie',
+    CHOOSE_NEW_PHOTO: 'Wybierz nowe zdjęcie',
     ADD_NEW_INGREDIENT: 'DODAJ SKŁADNIK',
     ADD_NEW_STEP: 'DODAJ KROK',
     SAVE: 'ZAPISZ',
     CANCEL: 'ANULUJ',
     YOU_HAVE_ANY_FAVOURITE_RECIPES: 'Nie masz żadnych ulubionych przepisów',
-    RECIPE_HAS_BEEN_DELETED: 'Przepis pomyślnie usunięty'
+    RECIPE_HAS_BEEN_DELETED: 'Przepis pomyślnie usunięty',
+    RECIPE_HAS_BEEN_EDITED: 'Przepis pomyślnie zedytowany'
 };

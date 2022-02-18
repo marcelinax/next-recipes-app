@@ -5,6 +5,7 @@ import difficulty from '@constants/difficulty';
 import Layout from '@layouts/Layout';
 import locales from '@locales';
 import React from 'react';
+import { toast } from 'react-toastify';
 
 const HomepageLayout = ({ children, search, setSearch, difficultySelect, setDifficultySelect }) => {
     return (

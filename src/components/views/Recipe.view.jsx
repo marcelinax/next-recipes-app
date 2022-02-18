@@ -1,6 +1,6 @@
 import React from 'react';
 import { IoMdTime } from 'react-icons/io';
-import { IoPersonOutline } from 'react-icons/io5';
+import { IoPersonOutline, IoPencil } from 'react-icons/io5';
 import { IoCellular, IoHeart, IoHeartOutline, IoTrashOutline } from 'react-icons/io5';
 import PropTypes from 'prop-types';
 import locales from '@locales';
@@ -22,7 +22,7 @@ const RecipeView = ({ id, bgImg, title, description, servings, difficulty, time,
             await apiClient.delete(`recipe/${id}`, {
                 id
             });
-            toast.success(locales.RECIPE_HAS_BEEN_DELETED);
+            await toast.success(locales.RECIPE_HAS_BEEN_DELETED);
             router.push('/');
         } catch (error) {
             console.log(error);
@@ -46,7 +46,8 @@ const RecipeView = ({ id, bgImg, title, description, servings, difficulty, time,
             <div className='w-full flex mb-5 items-center justify-between'>
                 <h1 className='font-semibold text-3xl drop-shadow-2xl mr-3 w-[90%]'>{title}</h1>
                 <div className='flex items-center'>
-                    <Button type={buttonTypes.ICON} onClick={onToggleIsFavourite} bgColor='bg-white' className='shadow-2xl px-1 py-1  mr-1' icon={isFavourite ? <IoHeart size={22} className='fill-red-600' /> : <IoHeartOutline size={22} className='stroke-red-600' />}/>
+                    <Button type={buttonTypes.ICON} onClick={onToggleIsFavourite} bgColor='bg-white' className='shadow-2xl px-1 py-1 mr-1' icon={isFavourite ? <IoHeart size={22} className='fill-red-600' /> : <IoHeartOutline size={22} className='stroke-red-600' />}/>
+                    <Button type={buttonTypes.ICON} onClick={()=> router.push(`/edit-recipe/${id}`)} bgColor='bg-white' className='shadow-2xl px-1 py-1 mr-1' icon={<IoPencil size={22} className='stroke-black/50' /> }/>
                     <Button type={buttonTypes.ICON} onClick={onDeleteRecipe} bgColor='bg-white' className='shadow-2xl px-1 py-1' icon={<IoTrashOutline size={22} className='stroke-black/50' /> }/>
                 </div>
             </div>

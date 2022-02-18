@@ -1,134 +1,28 @@
 import Button from '@components/Buttons/Button';
+import FormIngredientsList from '@components/Form/FormIngredientsList';
+import FormPreparationStepsList from '@components/Form/FormPreparationStepsList';
 import FormRow from '@components/Form/FormRow';
 import CustomSelect from '@components/Inputs/CustomSelect';
 import Input from '@components/Inputs/Input';
 import Textarea from '@components/Inputs/Textarea';
+import buttonTypes from '@constants/buttonTypes';
+import constants from '@constants/constants';
 import difficulty from '@constants/difficulty';
 import foodCategory from '@constants/foodCategory';
-import locales from '@locales';
-import React, { useState } from 'react';
-import buttonTypes from '@constants/buttonTypes';
-import FormPreparationStepsList from '@components/Form/FormPreparationStepsList';
-import FormIngredientsList from '@components/Form/FormIngredientsList';
-import constants from '@constants/constants';
-import { convertFileToUrl } from '@utils/convertFileToUrl';
-import { apiClient } from 'api/apiClient';
+import formTypes from '@constants/formTypes';
 import messages from '@constants/messages';
+import locales from '@locales';
 import { getFilteredErrorMessages } from '@utils/getFillteredErrorMessages';
-import { useRouter } from 'next/router';
+import React from 'react';
 
-const Form = () => {
+const Form = ({ recipe, onSubmit, formType, formData, errors, validateForm, inputHandler, selectHandler, imageFileHandler, ingredientsHandler, preparationStepsHandler}) => {
 
     const difficultyOptions = { ...difficulty };
     const foodCategoryOptions = { ...foodCategory };
-    const router = useRouter();
-    const [formData, setFormData] = useState({
-        title: '',
-        description: '',
-        category: '',
-        difficulty: '',
-        preparationTime: 0,
-        servings: 0,
-        photo: null,
-        ingredients: [],
-        preparationSteps: []
-    });
-    const [errors, setErrors] = useState([]);
-
-    const inputHandler = (e) => {
-        const { id, value } = e.target;
-        setFormData({
-            ...formData,
-            [id]: value
-        });
-    };
-
-    const selectHandler = (e, items) => {
-        setFormData({
-            ...formData,
-            [items]: e.target.value
-        });
-    };
-
-    const validateForm = () => {
-        let isValid = true;
-        const errs = [];
-        if (!formData.title) {
-            isValid = false;
-            errs.push(messages.TITLE_CANNOT_BE_EMPTY);
-        }
-        if (!formData.description) {
-            isValid = false;
-            errs.push(messages.DESCRIPTION_CANNOT_BE_EMPTY);
-        }
-        if (!formData.category) {
-            isValid = false;
-            errs.push(messages.CHOOSE_CATEGORY);
-        }
-        if (!formData.difficulty) {
-            isValid = false;
-            errs.push(messages.CHOOSE_DIFFICULTY);
-        }
-        if (!formData.photo) {
-            isValid = false;
-            errs.push(messages.CHOOSE_PHOTO);
-        }
-        if (!formData.preparationTime) {
-            isValid = false;
-            errs.push(messages.PREPARATION_TIME_CANNOT_BE_EMPTY);
-        }
-        if (formData.preparationTime <= 0) {
-            isValid = false;
-            errs.push(messages.INVALID_DATA);
-        }
-        if (!formData.servings) {
-            isValid = false;
-            errs.push(messages.SERVINGS_CANNOT_BE_EMPTY);
-        }
-        if (formData.servings <= 0) {
-            isValid = false;
-            errs.push(messages.INVALID_DATA);
-        }
-        if (formData.ingredients.length < 1) {
-            isValid = false;
-            errs.push(messages.INGREDIENTS_CANNOT_BE_EMPTY);
-        }
-        if (formData.preparationSteps.length < 1) {
-            isValid = false;
-            errs.push(messages.PREPARATION_STEPS_CANNOT_BE_EMPTY);
-        }
-        setErrors([...errs]);
-        return isValid;
-    };
-
-    const onCreateRecipe = async (e) => {
-        e.preventDefault();
-        try {
-            if (validateForm()) {
-                await apiClient.post('recipes', {
-                    ...formData,
-                    preparationTime: +formData.preparationTime, 
-                    servings: +formData.servings
-                    
-                });
-                router.push('/');
-            }
-        } catch (error) {
-            console.log(error); 
-        }
-    };
-
-    const imageFileHandler = async (e) => {
-        const url = await convertFileToUrl(e.target.files);
-        setFormData({
-            ...formData,
-            photo: url
-        });
-    };
 
     return (
         <div className='w-3/4 flex mx-auto flex-col mb-10'>
-            <form onSubmit={onCreateRecipe}>
+            <form onSubmit={onSubmit}>
                 <FormRow heading={locales.TITLE} width='w-full'>
                     <Input id='title' width='w-full' value={formData.title} setValue={inputHandler} error={getFilteredErrorMessages(errors, messages.TITLE_CANNOT_BE_EMPTY)}/>
                 </FormRow>
@@ -150,8 +44,8 @@ const Form = () => {
                     <FormRow heading={locales.AMOUNT_OF_SERVINGS} width='basis-1/3' className='ml-6'>
                         <Input id='servings' width='w-full' value={+formData.servings} setValue={inputHandler} error={getFilteredErrorMessages(errors, messages.SERVINGS_CANNOT_BE_EMPTY) || getFilteredErrorMessages(errors, messages.INVALID_DATA)}/>
                     </FormRow>
-                    <FormRow heading={locales.CHOOSE_PHOTO} width='basis-1/3' className='ml-6'>
-                        <div className=''>
+                    <FormRow heading={formType === formTypes.CREATE ? locales.CHOOSE_PHOTO : locales.CHOOSE_NEW_PHOTO} width='basis-1/3' className='ml-6'>
+                        <div>
                             <input onChange={imageFileHandler} type="file" accept="image/jpeg" className="block w-full mt-1 text-sm text-black/50 font-semibold 
                         file:mr-4 file:py-3 file:px-6
                         file:rounded-full file:border-0
@@ -165,22 +59,16 @@ const Form = () => {
                     </FormRow>
                 </div>
                 <FormRow heading={locales.INGREDIENTS} width='w-full mt-5'>
-                    <FormIngredientsList ingredients={formData.ingredients} setIngredients={(ingredients) => setFormData({
-                        ...formData,
-                        ingredients: [...ingredients]
-                    })}
+                    <FormIngredientsList ingredients={formData.ingredients} setIngredients={ingredientsHandler}
                     />
                 </FormRow>
                 <FormRow heading={locales.PREPARATION} width='w-full mt-10'>
-                    <FormPreparationStepsList steps={formData.preparationSteps} setSteps={(steps) => setFormData({
-                        ...formData,
-                        preparationSteps: [...steps]
-                    })}
+                    <FormPreparationStepsList steps={formData.preparationSteps} setSteps={preparationStepsHandler}
                     />
                 </FormRow>
                 <div className='w-full mt-10 justify-end flex'>
                     <Button type={buttonTypes.OUTLINE} borderColor='border-black/50' textColor='text-black/50' isLink={true} linkTo='/' title={locales.CANCEL} className='w-fit px-7 py-3 mr-3'/>
-                    <Button type={buttonTypes.TEXT} bgColor='bg-black/50' textColor='text-white' title={locales.SAVE} className='w-fit px-7 py-3' onClick={onCreateRecipe}/>
+                    <Button type={buttonTypes.TEXT} bgColor='bg-black/50' textColor='text-white' title={locales.SAVE} className='w-fit px-7 py-3' onClick={onSubmit}/>
                 </div>
             </form>
         </div>

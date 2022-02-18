@@ -1,11 +1,12 @@
-import Form from '@components/Form/Form';
+
 import Layout from '@layouts/Layout';
+import CreateForm from '@components/Form/CreateForm';
 
 
 const CreateRecipe = () => {
     return (
         <Layout >
-            <Form />
+            <CreateForm />
         </Layout>
     );
 };
